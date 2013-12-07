@@ -1,7 +1,7 @@
 #' 
 #' @title Runs a full ESPRESSO analysis
 #' @description This function calls the functions required to run a full ESPRESSO analysis 
-#'  where the model consit of an outcome (binary or continuous) determinant by a binary or 
+#'  where the model consists of an outcome (binary or continuous) determinant by a binary or 
 #'  continuous environmental determinant.
 #' @param simulation.params general parameters for the scenario(s) to analyse
 #' @param pheno.params paramaters for the outcome variables
@@ -21,10 +21,10 @@
 #' data(pheno.params)
 #' data(geno.params)
 #' 
-#' # run the function for the first two scenarios (by default all the scenarios are ran)
+#' # run the function for the first two scenarios (by default only the first scenario is ran)
 #' run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(1,2))
 #'
-#' # run the function for the last two scenarios (by default all the scenarios are ran)
+#' # run the function for the last two scenarios (by default only the first scenario is ran)
 #' run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(3,4))
 #' }
 #'

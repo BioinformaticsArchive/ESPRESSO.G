@@ -5,7 +5,7 @@
 #' @param disease.prev prevalence of the binary outcome.
 #' @param genotype a vector that represents the exposure data.
 #' @param subject.effect.data subject effect data, reflects the heterogenity in baseline disease risk.
-#' @param geno.OR odds ratios related to the 'at risk' genotype.
+#' @param geno.OR odds ratio related to the 'at risk' genotype.
 #' @return a binary vector that represents the phenotype data.
 #' @export
 #' @author Amadou Gaye

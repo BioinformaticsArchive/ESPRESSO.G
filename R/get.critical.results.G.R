@@ -11,18 +11,8 @@
 #' @param empirical.power estimated empirical power.
 #' @param modelled.power calculated theoretical power.
 #' @param mean.beta mean beta value of each of the determinants.
-#' @return a list that contains the following items:
-#' \code{environment.model} model of the environmental determinant
-#' \code{number.of.cases.required} number of cases required to achieve the desired 
-#' power under a binary outcome model.
-#' \code{number.of.controls.required} number of controls required to achieve the desired 
-#' power under a binary outcome model.
-#' \code{number.of.subjects.required} number of subjects required to achieve the desired 
-#' power under a quantatative outcome model.
-#' \code{empirical.power} estimated empirical power under each model.
-#' \code{modelled.power} power achieved under each model with specified sample size.
-#' \code{estimated.OR} esitmated odds-ratios due to shrinkage toward the null resulting from 
-#' misclassification.
+#' @return a list that contains the sample size required to achieve the desired power and the
+#' estimated modelled and theoretical power.
 #' @export
 #' @author Amadou Gaye
 #' @examples { 
@@ -36,7 +26,7 @@
 #' # outcome model
 #' pheno.model <- 1
 #'
-#' # model of the environmental exposure
+#' # model of the genetic variant
 #' geno.model <- 0
 #'
 #' # Estimated number of subjects required to achieve 80% power
@@ -54,6 +44,7 @@
 #' # return critical results and print a summary
 #' res <- get.critical.results.G(j, pheno.model, geno.model, sample.sizes.required, 
 #' empirical.power, modelled.power, mean.beta)
+#'
 #' }
 #' 
 get.critical.results.G <- function(scenario=1, pheno.model=0, geno.model=1, sample.sizes.required=NULL, 

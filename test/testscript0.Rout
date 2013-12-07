@@ -1,0 +1,861 @@
+
+R version 2.15.3 (2013-03-01) -- "Security Blanket"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i686-pc-linux-gnu (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # this script test 18 scenarios, for a binary outcome, to compare the results across differents setting 
+> # and ensure there is no 'weird' results due to some bug not spotted by R checks.
+> #
+> # the 18 scenarios are divided into 6 classes of checks as follow (starting from scenario 1 to 18):
+> # 1st class: 3 minor allele frequencies; 0.15, 0.25 and 0.4
+> # 2nd class: 3 OR related to the 'at risk' genetic exposure; 1.2, 2 and 3.5
+> # 3rd class: 3 Baseline ORs (heterogeneity in baseline risk of disease); 8, 12 and 16
+> # 4th class: 3 sensitivity values for the outcome; 0.65, 8, 1
+> # 5th class: 3 specificity values for the outcome; 0.65, 8, 1
+> # 6th class: 3 start number of cases/controls ; 1000/4000, 2000/8000 and 2000/4000
+> #
+> # apart from these parameters all the other parameters are set to the same values across all 18 scenarios
+> 
+> # load the library required for an analysis with a main effect environmental exposure
+> library(ESPRESSO.G)
+Loading required package: MASS
+> 
+> # set the working directory to the 'test' directory
+> #setwd(paste(getwd(), "/test", sep=""))
+> 
+> # load the input parameter tables
+> simulation.params <- read.table("simulation.params0.csv", header=T, sep=";")
+> pheno.params <- read.table("pheno.params0.csv", header=T, sep=";")
+> env.params <- read.table("geno.params0.csv", header=T, sep=";")
+> 
+> # call the function that runs a full ESPRESSO analysis and set it to run all 18 scenarios
+> run.espresso.G(simulation.params, pheno.params, env.params, scenarios2run=c(1:18))
+
+ 10 of 500 runs completed in scenario 1
+ 20 of 500 runs completed in scenario 1
+ 30 of 500 runs completed in scenario 1
+ 40 of 500 runs completed in scenario 1
+ 50 of 500 runs completed in scenario 1
+ 60 of 500 runs completed in scenario 1
+ 70 of 500 runs completed in scenario 1
+ 80 of 500 runs completed in scenario 1
+ 90 of 500 runs completed in scenario 1
+ 100 of 500 runs completed in scenario 1
+ 110 of 500 runs completed in scenario 1
+ 120 of 500 runs completed in scenario 1
+ 130 of 500 runs completed in scenario 1
+ 140 of 500 runs completed in scenario 1
+ 150 of 500 runs completed in scenario 1
+ 160 of 500 runs completed in scenario 1
+ 170 of 500 runs completed in scenario 1
+ 180 of 500 runs completed in scenario 1
+ 190 of 500 runs completed in scenario 1
+ 200 of 500 runs completed in scenario 1
+ 210 of 500 runs completed in scenario 1
+ 220 of 500 runs completed in scenario 1
+ 230 of 500 runs completed in scenario 1
+ 240 of 500 runs completed in scenario 1
+ 250 of 500 runs completed in scenario 1
+ 260 of 500 runs completed in scenario 1
+ 270 of 500 runs completed in scenario 1
+ 280 of 500 runs completed in scenario 1
+ 290 of 500 runs completed in scenario 1
+ 300 of 500 runs completed in scenario 1
+ 310 of 500 runs completed in scenario 1
+ 320 of 500 runs completed in scenario 1
+ 330 of 500 runs completed in scenario 1
+ 340 of 500 runs completed in scenario 1
+ 350 of 500 runs completed in scenario 1
+ 360 of 500 runs completed in scenario 1
+ 370 of 500 runs completed in scenario 1
+ 380 of 500 runs completed in scenario 1
+ 390 of 500 runs completed in scenario 1
+ 400 of 500 runs completed in scenario 1
+ 410 of 500 runs completed in scenario 1
+ 420 of 500 runs completed in scenario 1
+ 430 of 500 runs completed in scenario 1
+ 440 of 500 runs completed in scenario 1
+ 450 of 500 runs completed in scenario 1
+ 460 of 500 runs completed in scenario 1
+ 470 of 500 runs completed in scenario 1
+ 480 of 500 runs completed in scenario 1
+ 490 of 500 runs completed in scenario 1
+ 500 of 500 runs completed in scenario 1
+
+
+---- SUMMARY OF SCENARIO 1 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  1442
+
+Number of controls required
+---------------------------
+  5769
+
+Empirical power
+---------------
+  0.526
+
+Model power
+-----------
+  0.52
+
+Estimated ORs
+-----------
+  1.35
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 2
+ 20 of 500 runs completed in scenario 2
+ 30 of 500 runs completed in scenario 2
+ 40 of 500 runs completed in scenario 2
+ 50 of 500 runs completed in scenario 2
+ 60 of 500 runs completed in scenario 2
+ 70 of 500 runs completed in scenario 2
+ 80 of 500 runs completed in scenario 2
+ 90 of 500 runs completed in scenario 2
+ 100 of 500 runs completed in scenario 2
+ 110 of 500 runs completed in scenario 2
+ 120 of 500 runs completed in scenario 2
+ 130 of 500 runs completed in scenario 2
+ 140 of 500 runs completed in scenario 2
+ 150 of 500 runs completed in scenario 2
+ 160 of 500 runs completed in scenario 2
+ 170 of 500 runs completed in scenario 2
+ 180 of 500 runs completed in scenario 2
+ 190 of 500 runs completed in scenario 2
+ 200 of 500 runs completed in scenario 2
+ 210 of 500 runs completed in scenario 2
+ 220 of 500 runs completed in scenario 2
+ 230 of 500 runs completed in scenario 2
+ 240 of 500 runs completed in scenario 2
+ 250 of 500 runs completed in scenario 2
+ 260 of 500 runs completed in scenario 2
+ 270 of 500 runs completed in scenario 2
+ 280 of 500 runs completed in scenario 2
+ 290 of 500 runs completed in scenario 2
+ 300 of 500 runs completed in scenario 2
+ 310 of 500 runs completed in scenario 2
+ 320 of 500 runs completed in scenario 2
+ 330 of 500 runs completed in scenario 2
+ 340 of 500 runs completed in scenario 2
+ 350 of 500 runs completed in scenario 2
+ 360 of 500 runs completed in scenario 2
+ 370 of 500 runs completed in scenario 2
+ 380 of 500 runs completed in scenario 2
+ 390 of 500 runs completed in scenario 2
+ 400 of 500 runs completed in scenario 2
+ 410 of 500 runs completed in scenario 2
+ 420 of 500 runs completed in scenario 2
+ 430 of 500 runs completed in scenario 2
+ 440 of 500 runs completed in scenario 2
+ 450 of 500 runs completed in scenario 2
+ 460 of 500 runs completed in scenario 2
+ 470 of 500 runs completed in scenario 2
+ 480 of 500 runs completed in scenario 2
+ 490 of 500 runs completed in scenario 2
+ 500 of 500 runs completed in scenario 2
+
+
+---- SUMMARY OF SCENARIO 2 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  1196
+
+Number of controls required
+---------------------------
+  4782
+
+Empirical power
+---------------
+  0.662
+
+Model power
+-----------
+  0.67
+
+Estimated ORs
+-----------
+  1.36
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 3
+ 20 of 500 runs completed in scenario 3
+ 30 of 500 runs completed in scenario 3
+ 40 of 500 runs completed in scenario 3
+ 50 of 500 runs completed in scenario 3
+ 60 of 500 runs completed in scenario 3
+ 70 of 500 runs completed in scenario 3
+ 80 of 500 runs completed in scenario 3
+ 90 of 500 runs completed in scenario 3
+ 100 of 500 runs completed in scenario 3
+ 110 of 500 runs completed in scenario 3
+ 120 of 500 runs completed in scenario 3
+ 130 of 500 runs completed in scenario 3
+ 140 of 500 runs completed in scenario 3
+ 150 of 500 runs completed in scenario 3
+ 160 of 500 runs completed in scenario 3
+ 170 of 500 runs completed in scenario 3
+ 180 of 500 runs completed in scenario 3
+ 190 of 500 runs completed in scenario 3
+ 200 of 500 runs completed in scenario 3
+ 210 of 500 runs completed in scenario 3
+ 220 of 500 runs completed in scenario 3
+ 230 of 500 runs completed in scenario 3
+ 240 of 500 runs completed in scenario 3
+ 250 of 500 runs completed in scenario 3
+ 260 of 500 runs completed in scenario 3
+ 270 of 500 runs completed in scenario 3
+ 280 of 500 runs completed in scenario 3
+ 290 of 500 runs completed in scenario 3
+ 300 of 500 runs completed in scenario 3
+ 310 of 500 runs completed in scenario 3
+ 320 of 500 runs completed in scenario 3
+ 330 of 500 runs completed in scenario 3
+ 340 of 500 runs completed in scenario 3
+ 350 of 500 runs completed in scenario 3
+ 360 of 500 runs completed in scenario 3
+ 370 of 500 runs completed in scenario 3
+ 380 of 500 runs completed in scenario 3
+ 390 of 500 runs completed in scenario 3
+ 400 of 500 runs completed in scenario 3
+ 410 of 500 runs completed in scenario 3
+ 420 of 500 runs completed in scenario 3
+ 430 of 500 runs completed in scenario 3
+ 440 of 500 runs completed in scenario 3
+ 450 of 500 runs completed in scenario 3
+ 460 of 500 runs completed in scenario 3
+ 470 of 500 runs completed in scenario 3
+ 480 of 500 runs completed in scenario 3
+ 490 of 500 runs completed in scenario 3
+ 500 of 500 runs completed in scenario 3
+
+
+---- SUMMARY OF SCENARIO 3 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  1330
+
+Number of controls required
+---------------------------
+  5320
+
+Empirical power
+---------------
+  0.612
+
+Model power
+-----------
+  0.58
+
+Estimated ORs
+-----------
+  1.37
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 4
+ 20 of 500 runs completed in scenario 4
+ 30 of 500 runs completed in scenario 4
+ 40 of 500 runs completed in scenario 4
+ 50 of 500 runs completed in scenario 4
+ 60 of 500 runs completed in scenario 4
+ 70 of 500 runs completed in scenario 4
+ 80 of 500 runs completed in scenario 4
+ 90 of 500 runs completed in scenario 4
+ 100 of 500 runs completed in scenario 4
+ 110 of 500 runs completed in scenario 4
+ 120 of 500 runs completed in scenario 4
+ 130 of 500 runs completed in scenario 4
+ 140 of 500 runs completed in scenario 4
+ 150 of 500 runs completed in scenario 4
+ 160 of 500 runs completed in scenario 4
+ 170 of 500 runs completed in scenario 4
+ 180 of 500 runs completed in scenario 4
+ 190 of 500 runs completed in scenario 4
+ 200 of 500 runs completed in scenario 4
+ 210 of 500 runs completed in scenario 4
+ 220 of 500 runs completed in scenario 4
+ 230 of 500 runs completed in scenario 4
+ 240 of 500 runs completed in scenario 4
+ 250 of 500 runs completed in scenario 4
+ 260 of 500 runs completed in scenario 4
+ 270 of 500 runs completed in scenario 4
+ 280 of 500 runs completed in scenario 4
+ 290 of 500 runs completed in scenario 4
+ 300 of 500 runs completed in scenario 4
+ 310 of 500 runs completed in scenario 4
+ 320 of 500 runs completed in scenario 4
+ 330 of 500 runs completed in scenario 4
+ 340 of 500 runs completed in scenario 4
+ 350 of 500 runs completed in scenario 4
+ 360 of 500 runs completed in scenario 4
+ 370 of 500 runs completed in scenario 4
+ 380 of 500 runs completed in scenario 4
+ 390 of 500 runs completed in scenario 4
+ 400 of 500 runs completed in scenario 4
+ 410 of 500 runs completed in scenario 4
+ 420 of 500 runs completed in scenario 4
+ 430 of 500 runs completed in scenario 4
+ 440 of 500 runs completed in scenario 4
+ 450 of 500 runs completed in scenario 4
+ 460 of 500 runs completed in scenario 4
+ 470 of 500 runs completed in scenario 4
+ 480 of 500 runs completed in scenario 4
+ 490 of 500 runs completed in scenario 4
+ 500 of 500 runs completed in scenario 4
+
+
+---- SUMMARY OF SCENARIO 4 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  6710
+
+Number of controls required
+---------------------------
+  26839
+
+Empirical power
+---------------
+  0.016
+
+Model power
+-----------
+  0.02
+
+Estimated ORs
+-----------
+  1.17
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 5
+ 20 of 500 runs completed in scenario 5
+ 30 of 500 runs completed in scenario 5
+ 40 of 500 runs completed in scenario 5
+ 50 of 500 runs completed in scenario 5
+ 60 of 500 runs completed in scenario 5
+ 70 of 500 runs completed in scenario 5
+ 80 of 500 runs completed in scenario 5
+ 90 of 500 runs completed in scenario 5
+ 100 of 500 runs completed in scenario 5
+ 110 of 500 runs completed in scenario 5
+ 120 of 500 runs completed in scenario 5
+ 130 of 500 runs completed in scenario 5
+ 140 of 500 runs completed in scenario 5
+ 150 of 500 runs completed in scenario 5
+ 160 of 500 runs completed in scenario 5
+ 170 of 500 runs completed in scenario 5
+ 180 of 500 runs completed in scenario 5
+ 190 of 500 runs completed in scenario 5
+ 200 of 500 runs completed in scenario 5
+ 210 of 500 runs completed in scenario 5
+ 220 of 500 runs completed in scenario 5
+ 230 of 500 runs completed in scenario 5
+ 240 of 500 runs completed in scenario 5
+ 250 of 500 runs completed in scenario 5
+ 260 of 500 runs completed in scenario 5
+ 270 of 500 runs completed in scenario 5
+ 280 of 500 runs completed in scenario 5
+ 290 of 500 runs completed in scenario 5
+ 300 of 500 runs completed in scenario 5
+ 310 of 500 runs completed in scenario 5
+ 320 of 500 runs completed in scenario 5
+ 330 of 500 runs completed in scenario 5
+ 340 of 500 runs completed in scenario 5
+ 350 of 500 runs completed in scenario 5
+ 360 of 500 runs completed in scenario 5
+ 370 of 500 runs completed in scenario 5
+ 380 of 500 runs completed in scenario 5
+ 390 of 500 runs completed in scenario 5
+ 400 of 500 runs completed in scenario 5
+ 410 of 500 runs completed in scenario 5
+ 420 of 500 runs completed in scenario 5
+ 430 of 500 runs completed in scenario 5
+ 440 of 500 runs completed in scenario 5
+ 450 of 500 runs completed in scenario 5
+ 460 of 500 runs completed in scenario 5
+ 470 of 500 runs completed in scenario 5
+ 480 of 500 runs completed in scenario 5
+ 490 of 500 runs completed in scenario 5
+ 500 of 500 runs completed in scenario 5
+
+
+---- SUMMARY OF SCENARIO 5 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  387
+
+Number of controls required
+---------------------------
+  1548
+
+Empirical power
+---------------
+  1
+
+Model power
+-----------
+  1
+
+Estimated ORs
+-----------
+  1.84
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 6
+ 20 of 500 runs completed in scenario 6
+ 30 of 500 runs completed in scenario 6
+ 40 of 500 runs completed in scenario 6
+ 50 of 500 runs completed in scenario 6
+ 60 of 500 runs completed in scenario 6
+ 70 of 500 runs completed in scenario 6
+ 80 of 500 runs completed in scenario 6
+ 90 of 500 runs completed in scenario 6
+ 100 of 500 runs completed in scenario 6
+ 110 of 500 runs completed in scenario 6
+ 120 of 500 runs completed in scenario 6
+ 130 of 500 runs completed in scenario 6
+ 140 of 500 runs completed in scenario 6
+ 150 of 500 runs completed in scenario 6
+ 160 of 500 runs completed in scenario 6
+ 170 of 500 runs completed in scenario 6
+ 180 of 500 runs completed in scenario 6
+ 190 of 500 runs completed in scenario 6
+ 200 of 500 runs completed in scenario 6
+ 210 of 500 runs completed in scenario 6
+ 220 of 500 runs completed in scenario 6
+ 230 of 500 runs completed in scenario 6
+ 240 of 500 runs completed in scenario 6
+ 250 of 500 runs completed in scenario 6
+ 260 of 500 runs completed in scenario 6
+ 270 of 500 runs completed in scenario 6
+ 280 of 500 runs completed in scenario 6
+ 290 of 500 runs completed in scenario 6
+ 300 of 500 runs completed in scenario 6
+ 310 of 500 runs completed in scenario 6
+ 320 of 500 runs completed in scenario 6
+ 330 of 500 runs completed in scenario 6
+ 340 of 500 runs completed in scenario 6
+ 350 of 500 runs completed in scenario 6
+ 360 of 500 runs completed in scenario 6
+ 370 of 500 runs completed in scenario 6
+ 380 of 500 runs completed in scenario 6
+ 390 of 500 runs completed in scenario 6
+ 400 of 500 runs completed in scenario 6
+ 410 of 500 runs completed in scenario 6
+ 420 of 500 runs completed in scenario 6
+ 430 of 500 runs completed in scenario 6
+ 440 of 500 runs completed in scenario 6
+ 450 of 500 runs completed in scenario 6
+ 460 of 500 runs completed in scenario 6
+ 470 of 500 runs completed in scenario 6
+ 480 of 500 runs completed in scenario 6
+ 490 of 500 runs completed in scenario 6
+ 500 of 500 runs completed in scenario 6
+
+
+---- SUMMARY OF SCENARIO 6 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  109
+
+Number of controls required
+---------------------------
+  438
+
+Empirical power
+---------------
+  1
+
+Model power
+-----------
+  1
+
+Estimated ORs
+-----------
+  3.01
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 7
+ 20 of 500 runs completed in scenario 7
+ 30 of 500 runs completed in scenario 7
+ 40 of 500 runs completed in scenario 7
+ 50 of 500 runs completed in scenario 7
+ 60 of 500 runs completed in scenario 7
+ 70 of 500 runs completed in scenario 7
+ 80 of 500 runs completed in scenario 7
+ 90 of 500 runs completed in scenario 7
+ 100 of 500 runs completed in scenario 7
+ 110 of 500 runs completed in scenario 7
+ 120 of 500 runs completed in scenario 7
+ 130 of 500 runs completed in scenario 7
+ 140 of 500 runs completed in scenario 7
+ 150 of 500 runs completed in scenario 7
+ 160 of 500 runs completed in scenario 7
+ 170 of 500 runs completed in scenario 7
+ 180 of 500 runs completed in scenario 7
+ 190 of 500 runs completed in scenario 7
+ 200 of 500 runs completed in scenario 7
+ 210 of 500 runs completed in scenario 7
+ 220 of 500 runs completed in scenario 7
+ 230 of 500 runs completed in scenario 7
+ 240 of 500 runs completed in scenario 7
+ 250 of 500 runs completed in scenario 7
+ 260 of 500 runs completed in scenario 7
+ 270 of 500 runs completed in scenario 7
+ 280 of 500 runs completed in scenario 7
+ 290 of 500 runs completed in scenario 7
+ 300 of 500 runs completed in scenario 7
+ 310 of 500 runs completed in scenario 7
+ 320 of 500 runs completed in scenario 7
+ 330 of 500 runs completed in scenario 7
+ 340 of 500 runs completed in scenario 7
+ 350 of 500 runs completed in scenario 7
+ 360 of 500 runs completed in scenario 7
+ 370 of 500 runs completed in scenario 7
+ 380 of 500 runs completed in scenario 7
+ 390 of 500 runs completed in scenario 7
+ 400 of 500 runs completed in scenario 7
+ 410 of 500 runs completed in scenario 7
+ 420 of 500 runs completed in scenario 7
+ 430 of 500 runs completed in scenario 7
+ 440 of 500 runs completed in scenario 7
+ 450 of 500 runs completed in scenario 7
+ 460 of 500 runs completed in scenario 7
+ 470 of 500 runs completed in scenario 7
+ 480 of 500 runs completed in scenario 7
+ 490 of 500 runs completed in scenario 7
+ 500 of 500 runs completed in scenario 7
+
+
+---- SUMMARY OF SCENARIO 7 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  1769
+
+Number of controls required
+---------------------------
+  7078
+
+Empirical power
+---------------
+  0.376
+
+Model power
+-----------
+  0.37
+
+Estimated ORs
+-----------
+  1.34
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 8
+ 20 of 500 runs completed in scenario 8
+ 30 of 500 runs completed in scenario 8
+ 40 of 500 runs completed in scenario 8
+ 50 of 500 runs completed in scenario 8
+ 60 of 500 runs completed in scenario 8
+ 70 of 500 runs completed in scenario 8
+ 80 of 500 runs completed in scenario 8
+ 90 of 500 runs completed in scenario 8
+ 100 of 500 runs completed in scenario 8
+ 110 of 500 runs completed in scenario 8
+ 120 of 500 runs completed in scenario 8
+ 130 of 500 runs completed in scenario 8
+ 140 of 500 runs completed in scenario 8
+ 150 of 500 runs completed in scenario 8
+ 160 of 500 runs completed in scenario 8
+ 170 of 500 runs completed in scenario 8
+ 180 of 500 runs completed in scenario 8
+ 190 of 500 runs completed in scenario 8
+ 200 of 500 runs completed in scenario 8
+ 210 of 500 runs completed in scenario 8
+ 220 of 500 runs completed in scenario 8
+ 230 of 500 runs completed in scenario 8
+ 240 of 500 runs completed in scenario 8
+ 250 of 500 runs completed in scenario 8
+ 260 of 500 runs completed in scenario 8
+ 270 of 500 runs completed in scenario 8
+ 280 of 500 runs completed in scenario 8
+ 290 of 500 runs completed in scenario 8
+ 300 of 500 runs completed in scenario 8
+ 310 of 500 runs completed in scenario 8
+ 320 of 500 runs completed in scenario 8
+ 330 of 500 runs completed in scenario 8
+ 340 of 500 runs completed in scenario 8
+ 350 of 500 runs completed in scenario 8
+ 360 of 500 runs completed in scenario 8
+ 370 of 500 runs completed in scenario 8
+ 380 of 500 runs completed in scenario 8
+ 390 of 500 runs completed in scenario 8
+ 400 of 500 runs completed in scenario 8
+ 410 of 500 runs completed in scenario 8
+ 420 of 500 runs completed in scenario 8
+ 430 of 500 runs completed in scenario 8
+ 440 of 500 runs completed in scenario 8
+ 450 of 500 runs completed in scenario 8
+ 460 of 500 runs completed in scenario 8
+ 470 of 500 runs completed in scenario 8
+ 480 of 500 runs completed in scenario 8
+ 490 of 500 runs completed in scenario 8
+ 500 of 500 runs completed in scenario 8
+
+
+---- SUMMARY OF SCENARIO 8 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  1906
+
+Number of controls required
+---------------------------
+  7625
+
+Empirical power
+---------------
+  0.326
+
+Model power
+-----------
+  0.32
+
+Estimated ORs
+-----------
+  1.33
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 9
+ 20 of 500 runs completed in scenario 9
+ 30 of 500 runs completed in scenario 9
+ 40 of 500 runs completed in scenario 9
+ 50 of 500 runs completed in scenario 9
+ 60 of 500 runs completed in scenario 9
+ 70 of 500 runs completed in scenario 9
+ 80 of 500 runs completed in scenario 9
+ 90 of 500 runs completed in scenario 9
+ 100 of 500 runs completed in scenario 9
+ 110 of 500 runs completed in scenario 9
+ 120 of 500 runs completed in scenario 9
+ 130 of 500 runs completed in scenario 9
+ 140 of 500 runs completed in scenario 9
+ 150 of 500 runs completed in scenario 9
+ 160 of 500 runs completed in scenario 9
+ 170 of 500 runs completed in scenario 9
+ 180 of 500 runs completed in scenario 9
+ 190 of 500 runs completed in scenario 9
+ 200 of 500 runs completed in scenario 9
+ 210 of 500 runs completed in scenario 9
+ 220 of 500 runs completed in scenario 9
+ 230 of 500 runs completed in scenario 9
+ 240 of 500 runs completed in scenario 9
+ 250 of 500 runs completed in scenario 9
+ 260 of 500 runs completed in scenario 9
+ 270 of 500 runs completed in scenario 9
+ 280 of 500 runs completed in scenario 9
+ 290 of 500 runs completed in scenario 9
+ 300 of 500 runs completed in scenario 9
+ 310 of 500 runs completed in scenario 9
+ 320 of 500 runs completed in scenario 9
+ 330 of 500 runs completed in scenario 9
+ 340 of 500 runs completed in scenario 9
+ 350 of 500 runs completed in scenario 9
+ 360 of 500 runs completed in scenario 9
+ 370 of 500 runs completed in scenario 9
+ 380 of 500 runs completed in scenario 9
+ 390 of 500 runs completed in scenario 9
+ 400 of 500 runs completed in scenario 9
+ 410 of 500 runs completed in scenario 9
+ 420 of 500 runs completed in scenario 9
+ 430 of 500 runs completed in scenario 9
+ 440 of 500 runs completed in scenario 9
+ 450 of 500 runs completed in scenario 9
+ 460 of 500 runs completed in scenario 9
+ 470 of 500 runs completed in scenario 9
+ 480 of 500 runs completed in scenario 9
+ 490 of 500 runs completed in scenario 9
+ 500 of 500 runs completed in scenario 9
+
+
+---- SUMMARY OF SCENARIO 9 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  1948
+
+Number of controls required
+---------------------------
+  7791
+
+Empirical power
+---------------
+  0.34
+
+Model power
+-----------
+  0.31
+
+Estimated ORs
+-----------
+  1.33
+
+---- END OF SUMMARY ----
+
+ 10 of 500 runs completed in scenario 10
+ 20 of 500 runs completed in scenario 10
+ 30 of 500 runs completed in scenario 10
+ 40 of 500 runs completed in scenario 10
+ 50 of 500 runs completed in scenario 10
+ 60 of 500 runs completed in scenario 10
+ 70 of 500 runs completed in scenario 10
+ 80 of 500 runs completed in scenario 10
+ 90 of 500 runs completed in scenario 10
+ 100 of 500 runs completed in scenario 10
+ 110 of 500 runs completed in scenario 10
+ 120 of 500 runs completed in scenario 10
+ 130 of 500 runs completed in scenario 10
+ 140 of 500 runs completed in scenario 10
+ 150 of 500 runs completed in scenario 10
+ 160 of 500 runs completed in scenario 10
+ 170 of 500 runs completed in scenario 10
+ 180 of 500 runs completed in scenario 10
+ 190 of 500 runs completed in scenario 10
+ 200 of 500 runs completed in scenario 10
+ 210 of 500 runs completed in scenario 10
+ 220 of 500 runs completed in scenario 10
+ 230 of 500 runs completed in scenario 10
+ 240 of 500 runs completed in scenario 10
+ 250 of 500 runs completed in scenario 10
+ 260 of 500 runs completed in scenario 10
+ 270 of 500 runs completed in scenario 10
+ 280 of 500 runs completed in scenario 10
+ 290 of 500 runs completed in scenario 10
+ 300 of 500 runs completed in scenario 10
+ 310 of 500 runs completed in scenario 10
+ 320 of 500 runs completed in scenario 10
+ 330 of 500 runs completed in scenario 10
+ 340 of 500 runs completed in scenario 10
+ 350 of 500 runs completed in scenario 10
+ 360 of 500 runs completed in scenario 10
+ 370 of 500 runs completed in scenario 10
+ 380 of 500 runs completed in scenario 10
+ 390 of 500 runs completed in scenario 10
+ 400 of 500 runs completed in scenario 10
+ 410 of 500 runs completed in scenario 10
+ 420 of 500 runs completed in scenario 10
+ 430 of 500 runs completed in scenario 10
+ 440 of 500 runs completed in scenario 10
+ 450 of 500 runs completed in scenario 10
+ 460 of 500 runs completed in scenario 10
+ 470 of 500 runs completed in scenario 10
+ 480 of 500 runs completed in scenario 10
+ 490 of 500 runs completed in scenario 10
+ 500 of 500 runs completed in scenario 10
+
+
+---- SUMMARY OF SCENARIO 10 ----
+
+Models
+------
+  Outcome: binary 
+  Genetic determinant: binary
+
+Number of cases required
+------------------------
+  3276
+
+Number of controls required
+---------------------------
+  13102
+
+Empirical power
+---------------
+  0.136
+
+Model power
+-----------
+  0.1
+
+Estimated ORs
+-----------
+  1.28
+
+---- END OF SUMMARY ----
+Error in sample(A.1.indx, num.A.1.missed, replace = FALSE) : 
+  invalid 'size' argument
+Calls: run.espresso.G ... get.observed.data.G -> get.obs.geno -> misclassify -> sample
+Execution halted

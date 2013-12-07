@@ -3,10 +3,10 @@
 #' @description The function uses the effects data of the genetic determinant to construct a linear predictor(LP). 
 #'  The outcome is a normally distributed variable generated with a mean equal to the LP and a standard 
 #'  deviation of 1.
-#' @param num.subjects number of subjects to generate
+#' @param num.subjects number of subjects to generate.
 #' @param genotype a vector that represents the exposure data
-#' @param geno.efkt effect size of the 'genetic variant'at risk' genotype
-#' @return a binary vector that represents the phenotype data
+#' @param geno.efkt effect size of related to the 'at risk' allele.
+#' @return a binary vector that represents the phenotype data.
 #' @export
 #' @author Amadou Gaye
 #' @examples {

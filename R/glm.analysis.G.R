@@ -13,7 +13,7 @@
 #' # load a table that contains observed quantitative outcome and binary SNP data
 #' data(observed.data.G)
 #'
-#' # run a logistic regression (outcome is binary)
+#' # run a logistic regression (outcome is quantitative)
 #' glm.estimates <- glm.analysis.G(pheno.model=1, observed.data.G)
 #' 
 #' }
