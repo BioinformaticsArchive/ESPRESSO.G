@@ -6,16 +6,16 @@
     geno.efkt = 0.25)
 }
 \arguments{
-  \item{num.subjects}{number of subjects to generate}
+  \item{num.subjects}{number of subjects to generate.}
 
   \item{genotype}{a vector that represents the exposure
   data}
 
-  \item{geno.efkt}{effect size of the 'genetic variant'at
-  risk' genotype}
+  \item{geno.efkt}{effect size of related to the 'at risk'
+  allele.}
 }
 \value{
-  a binary vector that represents the phenotype data
+  a binary vector that represents the phenotype data.
 }
 \description{
   The function uses the effects data of the genetic

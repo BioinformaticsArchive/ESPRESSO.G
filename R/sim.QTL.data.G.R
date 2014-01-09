@@ -21,16 +21,19 @@
 #' 
 sim.QTL.data.G <- function(numsubjects=10000, geno.model=0, MAF=0.1, geno.efkt=0.25){
   
-   num.obs <- numsubjects
-	   
+	 geno.mod <- geno.model
+   geno.maf <- MAF
+   geno.efsize <- geno.efkt
+   
    # GENERATE THE TRUE GENOTYPE DATA
-			geno.data <- sim.geno.data(num.obs, geno.model, MAF)
-			allele.A <- geno.data$allele.A
-			allele.B <- geno.data$allele.B
-			genotype <- geno.data$genotype
+	 geno.data <- sim.geno.data(num.obs=numsubjects, geno.model=geno.mod, MAF=geno.maf)
+	 allele.A <- geno.data$allele.A
+	 allele.B <- geno.data$allele.B
+	 genotype <- geno.data$genotype
 
    # GENERATE OUTCOME DATA
-   pheno.data <- sim.pheno.qtl.G(num.obs, genotype, geno.efkt)
+   genodata <- genotype
+   pheno.data <- sim.pheno.qtl.G(num.subjects=numsubjects, genotype=genodata, geno.efkt=geno.efsize)
    phenotype <- pheno.data
 
    # STORE THE GENERATED TRUE DATA INTO AN OUTPUT MATRIX 

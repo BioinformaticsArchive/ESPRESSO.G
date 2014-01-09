@@ -45,6 +45,16 @@
 sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, allowed.sample.size=20000000, 
                         disease.prev=0.1, geno.model=0, MAF=0.1, geno.OR=1.5, baseline.OR=12.36){
   
+   numobs <- block.size
+   ncases <- numcases
+   ncontrols <- numcontrols
+   max.pop.size <- allowed.sample.size
+   pheno.prev <- disease.prev
+   geno.mod <- geno.model
+   geno.maf <- MAF
+   geno.odds <- geno.OR
+   baseline.odds <- baseline.OR
+  
    # SET UP ZEROED COUNT VECTORS TO DETERMINE WHEN ENOUGH CASES AND CONTROLS HAVE BEEN GENERATED
    complete <- 0
    complete.absolute <- 0
@@ -63,7 +73,7 @@ sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, all
    while(complete==0 && complete.absolute==0){
 
      # GENERATE THE TRUE GENOTYPE DATA
-     geno.data <- sim.geno.data(block.size, geno.model, MAF)
+     geno.data <- sim.geno.data(num.obs=numobs, geno.model=geno.mod, MAF=geno.maf)
      allele.A <- geno.data$allele.A
      allele.B <- geno.data$allele.B
      genotype <- geno.data$genotype
@@ -71,10 +81,13 @@ sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, all
      # GENERATE SUBJECT EFFECT DATA THAT REFLECTS BASELINE RISK: 
      # NORMALLY DISTRIBUTED RANDOM EFFECT VECTOR WITH APPROPRIATE 
      # VARIANCE ON SCALE OF LOG-ODDS
-     subject.effect.data <- sim.subject.data(block.size, baseline.OR)
+     subject.effect.data <- sim.subject.data(num.obs=numobs, baseline.OR=baseline.odds)
 
      # GENERATE THE TRUE OUTCOME DATA
-     pheno.data <- sim.pheno.bin.G(block.size, disease.prev, genotype, subject.effect.data, geno.OR)
+     genodata <- genotype
+     s.efkt.data <- subject.effect.data
+     pheno.data <- sim.pheno.bin.G(num.obs=numobs, disease.prev=pheno.prev, genotype=geno.data$genotype, 
+                                   subject.effect.data=s.efkt.data, geno.OR=geno.odds)
      phenotype <- pheno.data
      
      # STORE THE TRUE OUTCOME, GENETIC AND ALLELE DATA IN AN OUTPUT MATRIX 

@@ -33,12 +33,19 @@ get.observed.data.G <- function(true.data=NULL, pheno.model=0, pheno.error=c(0.1
 			   cat(" Check the argument 'true.data'\n")
 			   stop(" End of process!\n\n", call.=FALSE)
 		 	}
-		 	
-		 	sim.df <- true.data      
 
+    sim.df <- true.data  
+    pheno.mod <- pheno.model
+    pheno.err <- pheno.error
+    pheno.rel <- pheno.reliability
+    geno.mod <- geno.model
+    geno.maf <- MAF
+    geno.err <- geno.error
+    
     # GET THE OBSERVED GENOTYPES
 	   true.genotype <- sim.df$genotype
-	   obs.genotype <- get.obs.geno(sim.df$allele.A,sim.df$allele.B, geno.model, MAF, geno.error)
+	   obs.genotype <- get.obs.geno(allele.A=sim.df$allele.A, allele.B=sim.df$allele.B, 
+                                  geno.model=geno.mod, MAF=geno.maf, geno.error=geno.err)
 	   
 	   # REPLACE THE TRUE GENOTYPE DATA BY THE NOW GENERATED OBSERVED GENOTYPES
 	   # IN THE INITIAL MATRIX THAT HELD THE TRUE DATA
@@ -48,10 +55,10 @@ get.observed.data.G <- function(true.data=NULL, pheno.model=0, pheno.error=c(0.1
 	   
     # GET THE OBSERVED OUTCOME DATA
     true.phenotype <- sim.df$phenotype
-    if(pheno.model==0){
-      obs.phenotype <- get.obs.pheno(true.phenotype, pheno.model, pheno.error)
+    if(pheno.mod==0){
+      obs.phenotype <- get.obs.pheno(phenotype=true.phenotype, pheno.model=pheno.mod, pheno.error=pheno.err)
     }else{
-      obs.phenotype <- get.obs.pheno(true.phenotype, pheno.model, pheno.reliability=pheno.reliability)
+      obs.phenotype <- get.obs.pheno(phenotype=true.phenotype, pheno.model=pheno.mod, pheno.reliability=pheno.rel)
     }
     
     # REPLACE THE TRUE PHENOTYPE DATA BY THE NOW GENERATED OBSERVED PHENOTYPES

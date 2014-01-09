@@ -32,7 +32,11 @@ sim.pheno.qtl.G <- function(num.subjects=10000, genotype=NULL, geno.efkt=0.25){
 			  cat(" No genotype data found.\n")
 			  cat(" Check the argument 'genotype'\n")
 			  stop(" End of process!\n\n", call.=FALSE)
-			}
+		}
+   
+   numobs <- num.subjects
+   genodata <- genotype
+   geno.efsize <- geno.efkt
 
    # ALPHA IS EQUAL TO THE MEAN OF THE TRAIT, WHICH IS 0
    alpha <- 0 

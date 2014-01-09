@@ -50,8 +50,8 @@ get.obs.geno <- function (allele.A=NULL, allele.B=NULL, geno.model=0, MAF=0.1, g
   true.allele.A <- allele.A
   true.allele.B <- allele.B
   
-  observed.allele.A <- misclassify(true.allele.A, geno.error[1], geno.error[2])
-  observed.allele.B <- misclassify(true.allele.B, geno.error[1], geno.error[2])
+  observed.allele.A <- misclassify(binary.vector=true.allele.A, error.1.0=geno.error[1], error.0.1=geno.error[2])
+  observed.allele.B <- misclassify(binary.vector=true.allele.B, error.1.0=geno.error[1], error.0.1=geno.error[2])
   observed.genotype <- observed.allele.A+observed.allele.B
   
   if(geno.model==0){

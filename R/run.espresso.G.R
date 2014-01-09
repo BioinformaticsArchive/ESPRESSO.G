@@ -67,8 +67,8 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
   # CREATE UP TO 20M SUBJECTS IN BLOCKS OF 20K UNTIL REQUIRED NUMBER OF
   # CASES AND CONTROLS IS ACHIEVED. IN GENERAL THE ONLY PROBLEM IN ACHIEVING THE
   # REQUIRED NUMBER OF CASES WILL OCCUR IF THE DISEASE PREVALENCE IS VERY LOW
-  allowed.sample.size <- 20000000
-  block.size <- 20000
+  max.pop.size <- 20000000
+  nobs <- 20000
   
   
   # DECLARE MATRIX THAT STORE THE RESULTS FOR EACH SCENARIO (ONE PER SCENARIO PER ROW)
@@ -88,70 +88,73 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
      set.seed(s.parameters$seed.val[j])
   
      # SIMULATION PARAMETERS
-     scenario.id <- s.parameters$scenario.id[j]				     
-     seed.val <- s.parameters$seed.val[j]					          
-     numsims <- s.parameters$numsims[j]					            
-     numcases <- s.parameters$numcases[j]					          
-     numcontrols <- s.parameters$numcontrols[j]		
-     numsubjects <- s.parameters$numsubjects[j]				     
-     baseline.OR <- s.parameters$RR.5.95[j]					           
-     pval <- s.parameters$p.val[j]						                
-     power <- s.parameters$power[j]
+     scenario <- s.parameters$scenario.id[j]				     
+     seed <- s.parameters$seed.val[j]					          
+     nsims <- s.parameters$numsims[j]					            
+     ncases <- s.parameters$numcases[j]					          
+     ncontrols <- s.parameters$numcontrols[j]		
+     nsubjects <- s.parameters$numsubjects[j]				     
+     baseline.odds <- s.parameters$RR.5.95[j]					           
+     pvalue <- s.parameters$p.val[j]						                
+     tpower <- s.parameters$power[j]
      
      # OUTCOME PARAMETERS
-     pheno.model <- s.parameters$pheno.model[j]
-     disease.prev <- s.parameters$disease.prev[j]
-     pheno.error <- c(1-s.parameters$pheno.sensitivity[j],1-s.parameters$pheno.specificity[j])
-     pheno.reliability <- s.parameters$pheno.reliability[j]    
+     pheno.mod <- s.parameters$pheno.model[j]
+     pheno.prev <- s.parameters$disease.prev[j]
+     pheno.err <- c(1-s.parameters$pheno.sensitivity[j],1-s.parameters$pheno.specificity[j])
+     pheno.rel <- s.parameters$pheno.reliability[j]    
   
      # GENETIC DETERMINANTS PARAMETERS
-     geno.model<- s.parameters$geno.model[j]
-     MAF <-  s.parameters$MAF[j]    
-     geno.OR <- s.parameters$geno.OR[j]
-     geno.efkt <- s.parameters$geno.efkt[j]
-     geno.error <- c(1-s.parameters$geno.sensitivity[j],1-s.parameters$geno.specificity[j])
+     geno.mod<- s.parameters$geno.model[j]
+     geno.maf <-  s.parameters$MAF[j]    
+     geno.odds <- s.parameters$geno.OR[j]
+     geno.efsize <- s.parameters$geno.efkt[j]
+     geno.err <- c(1-s.parameters$geno.sensitivity[j],1-s.parameters$geno.specificity[j])
   
      # VECTORS TO HOLD BETA, SE AND Z VALUES AFTER EACH RUN OF THE SIMULATION
-     beta.values <- rep(NA,numsims)
-     se.values <- rep(NA,numsims)
-     z.values<-rep(NA,numsims)
+     beta.values <- rep(NA,nsims)
+     se.values <- rep(NA,nsims)
+     z.values<-rep(NA,nsims)
   
   
      # TRACER TO DETECT EXCEEDING MAX ALLOWABLE SAMPLE SIZE
      sample.size.excess <- 0
   
      # GENERATE AND ANALYSE DATASETS ONE AT A TIME 
-     for(s in 1:numsims)            # s from 1 to total number of simulations
+     for(s in 1:nsims)            # s from 1 to total number of simulations
      {
   
         #----------------------------------GENERATE "TRUE" DATA-----------------------------#
   
-        if(pheno.model == 0){ # UNDER BINARY OUTCOME MODEL
+        if(pheno.mod == 0){ # UNDER BINARY OUTCOME MODEL
   		      # GENERATE CASES AND CONTROLS UNTILL THE REQUIRED NUMBER OF CASES, CONTROLS IS ACHIEVED 
-  			     sim.data <- sim.CC.data.G(block.size, numcases, numcontrols, allowed.sample.size, disease.prev, geno.model, MAF, geno.OR, baseline.OR)
-  			     true.data <- sim.data$data
+  			     sim.data <- sim.CC.data.G(block.size=nobs, numcases=ncases, numcontrols=ncontrols, allowed.sample.size=max.pop.size, 
+                                       disease.prev=pheno.prev, geno.model=geno.mod, MAF=geno.maf, geno.OR=geno.odds, 
+                                       baseline.OR=baseline.odds)
+  			     t.data <- sim.data$data
   
         }else{ # UNDER QUANTITATIVE OUTCOME MODEL
           # GENERATE THE SPECIFIED NUMBER OF SUBJECTS
-          true.data <- sim.QTL.data.G(numsubjects, geno.model, MAF, geno.efkt)
+          t.data <- sim.QTL.data.G(numsubjects=nsubjects, geno.model=geno.mod, MAF=geno.maf, geno.efkt=geno.efsize)
         }
   
         #------------SIMULATE ERRORS AND ADD THEM TO THE TRUE COVARIATES DATA TO OBTAIN OBSERVED COVARIATES DATA-----------#
   
         # ADD APPROPRIATE ERRORS TO PRODUCE OBSERVED GENOTYPES 
-        observed.data <- get.observed.data.G(true.data,pheno.model,pheno.error,pheno.reliability,geno.model, MAF, geno.error)
+        o.data <- get.observed.data.G(true.data=t.data,pheno.model=pheno.mod,pheno.error=pheno.err,pheno.reliability=pheno.rel,
+                                              geno.model=geno.mod,MAF=geno.maf,geno.error=geno.err)
   
         
         #--------------------------DATA ANALYSIS ----------------------------#
   
-        glm.estimates <- glm.analysis.G(pheno.model, observed.data)
+        glm.estimates <- glm.analysis.G(pheno.model=pheno.mod, observed.data=o.data)
   
   			   beta.values[s] <- glm.estimates[[1]]
   			   se.values[s] <- glm.estimates[[2]]
   			   z.values[s] <- glm.estimates[[3]]
   			   
   			   # PRINT TRACER AFTER EVERY Nth DATASET CREATED
-        if(s %% trace.interval ==0)cat("\n",s,"of",numsims,"runs completed in scenario",scenario.id)
+        if(s %% trace.interval ==0)cat("\n",s,"of",nsims,"runs completed in scenario",scenario)
   
      }
      cat("\n\n")
@@ -160,41 +163,44 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
   
      # SUMMARISE PRIMARY PARAMETER ESTIMATES
      # COEFFICIENTS ON LOG-ODDS SCALE
-     mean.beta <- mean(beta.values, na.rm=T)
-     mean.se <- sqrt(mean(se.values^2, na.rm=T))
-     mean.model.z <- mean.beta/mean.se
+     m.beta <- mean(beta.values, na.rm=T)
+     m.se <- sqrt(mean(se.values^2, na.rm=T))
+     m.model.z <- m.beta/m.se
      
    
      #---------------------------POWER AND SAMPLE SIZE CALCULATIONS----------------------#
   
      # CALCULATE THE SAMPLE SIZE REQUIRED UNDER EACH MODEL
-     sample.sizes.required <- samplsize.calc(numcases, numcontrols, numsubjects, pheno.model, pval, power, mean.model.z)
+     sample.sizes.needed <- samplsize.calc(numcases=ncases, numcontrols=ncontrols, num.subjects=nsubjects, 
+                                             pheno.model=pheno.mod, pval=pvalue, power=tpower, mean.model.z=m.model.z)
   
      # CALCULATE EMPIRICAL POWER AND THE MODELLED POWER 
      # THE EMPIRICAL POWER IS SIMPLY THE PROPORTION OF SIMULATIONS IN WHICH
      # THE Z STATISTIC FOR THE PARAMETER OF INTEREST EXCEEDS THE Z STATISTIC
      # FOR THE DESIRED LEVEL OF STATISTICAL SIGNIFICANCE
-     power <- power.calc(pval, z.values, mean.model.z)
+     zvals <- z.values
+     power <- power.calc(pval=pvalue, z.values=zvals, mean.model.z=m.model.z)
   
   
      #------------------MAKE FINAL A TABLE THAT HOLDS BOTH INPUT PARAMETERS AND OUTPUT RESULTS---------------#
   
-     critical.res <- get.critical.results.G(j, pheno.model, geno.model, sample.sizes.required, power$empirical, power$modelled, mean.beta)
-  
+     critical.res <- get.critical.results.G(scenario=j, pheno.model=pheno.mod, geno.model=geno.mod, sample.sizes.required=sample.sizes.needed, 
+                                            empirical.power=power$empirical, modelled.power=power$modelled, mean.beta=m.beta)
+
      # 	WHEN OUTCOME IS BINARY INFORM IF RECORD EXCEEDED MAXIMUM SAMPLE SIZE
-     if(pheno.model==0){
+     if(pheno.mod==0){
        sample.size.excess <- sim.data$allowed.sample.size.exceeded
        if(sample.size.excess==1)
        {
          excess <- "yes"
          cat("\nTO GENERATE THE NUMBER OF CASES SPECIFIED AT OUTSET\n")
-         cat("THE SIMULATION EXCEEDED THE MAXIMUM POPULATION SIZE OF ", allowed.sample.size,"\n")
+         cat("THE SIMULATION EXCEEDED THE MAXIMUM POPULATION SIZE OF ", max.pop.size,"\n")
        }else{
          excess <- "no"
        }
      }
      
-     if(pheno.model==0){
+     if(pheno.mod==0){
         mod <- "binary"
         inparams <- s.parameters[j,]
         inparams [c(6,14,18)] <- "NA"

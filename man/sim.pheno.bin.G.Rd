@@ -18,7 +18,7 @@
   \item{subject.effect.data}{subject effect data, reflects
   the heterogenity in baseline disease risk.}
 
-  \item{geno.OR}{odds ratios related to the 'at risk'
+  \item{geno.OR}{odds ratio related to the 'at risk'
   genotype.}
 }
 \value{

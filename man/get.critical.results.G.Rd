@@ -28,21 +28,9 @@
   determinants.}
 }
 \value{
-  a list that contains the following items:
-  \code{environment.model} model of the environmental
-  determinant \code{number.of.cases.required} number of
-  cases required to achieve the desired power under a
-  binary outcome model. \code{number.of.controls.required}
-  number of controls required to achieve the desired power
-  under a binary outcome model.
-  \code{number.of.subjects.required} number of subjects
-  required to achieve the desired power under a
-  quantatative outcome model. \code{empirical.power}
-  estimated empirical power under each model.
-  \code{modelled.power} power achieved under each model
-  with specified sample size. \code{estimated.OR} esitmated
-  odds-ratios due to shrinkage toward the null resulting
-  from misclassification.
+  a list that contains the sample size required to achieve
+  the desired power and the estimated modelled and
+  theoretical power.
 }
 \description{
   Gets the number of cases and controls or subjects and the
@@ -61,7 +49,7 @@ j <- 1
 # outcome model
 pheno.model <- 1
 
-# model of the environmental exposure
+# model of the genetic variant
 geno.model <- 0
 
 # Estimated number of subjects required to achieve 80\% power
@@ -79,6 +67,7 @@ mean.beta <- 0.20
 # return critical results and print a summary
 res <- get.critical.results.G(j, pheno.model, geno.model, sample.sizes.required,
 empirical.power, modelled.power, mean.beta)
+
 }
 }
 \author{

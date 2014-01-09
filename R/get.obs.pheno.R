@@ -52,13 +52,11 @@ get.obs.pheno <- function (phenotype=NULL, pheno.model=0, pheno.error=c(0.05,0.0
   } 
   
   true.phenotype <- phenotype
-  misclass.rate.1.to.0 <- pheno.error[1]
-  misclass.rate.0.to.1 <- pheno.error[2]	
   
   # GET THE OBSERVED OUTCOME DATA
   if(pheno.model==0){ # IF THE OUTCOME IS BINARY
     
-    observed.phenotype <- misclassify(true.phenotype, misclass.rate.1.to.0, misclass.rate.0.to.1)
+    observed.phenotype <- misclassify(binary.vector=phenotype, error.1.0=pheno.error[1], error.0.1=pheno.error[2])
     
   }else{ # IF THE OUTCOME IS CONTINUOUS NORMAL
     

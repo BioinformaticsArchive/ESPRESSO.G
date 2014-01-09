@@ -39,18 +39,25 @@ sim.pheno.bin.G <- function(num.obs=10000, disease.prev=0.1, genotype=NULL, subj
     cat(" Check the argument 'subject.effect.data'\n")
     stop(" End of process!\n\n", call.=FALSE)
   }
+  
+  numobs <- num.obs
+  pheno.prev <- disease.prev
+  genodata <- genotype
+  s.efkt.data <- subject.effect.data
+  geno.odds <- geno.OR
  
   # GET THE ALPHA AND BETA VALUES
-  alpha <- log(disease.prev/(1-disease.prev))
-  beta <- log(geno.OR)
+  alpha <- log(pheno.prev/(1-pheno.prev))
+  beta <- log(geno.odds)
   
   # GENERATE THE LINEAR PREDICTOR
-  lp <- alpha + (beta*genotype) + subject.effect.data
-  # GET THE 'mu' THE PROBABILITY OF DISEASE THROUGH LOGISTIC TRANSFORMATION
+  lp <- alpha + (beta*genodata) + s.efkt.data
+
+  # GET 'mu' THE PROBABILITY OF DISEASE THROUGH LOGISTIC TRANSFORMATION
   mu <- exp(lp)/(1 + exp(lp))
-  
+
   # GENERATE THE PHENOTYPE DATA AND RETURN IT AS A DATAFRAME
-  phenotype <- rbinom(num.obs,1,mu)
+  phenotype <- rbinom(numobs,1,mu)
   return(phenotype)
 }
 
