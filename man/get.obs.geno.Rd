@@ -2,8 +2,8 @@
 \alias{get.obs.geno}
 \title{Adds some error to genotype data}
 \usage{
-  get.obs.geno(allele.A = NULL, allele.B = NULL,
-    geno.model = 0, MAF = 0.1, geno.error = c(0.05, 0.05))
+get.obs.geno(allele.A = NULL, allele.B = NULL, geno.model = 0,
+  MAF = 0.1, geno.error = c(0.05, 0.05))
 }
 \arguments{
   \item{allele.A}{Allele A}
@@ -21,16 +21,19 @@
   1-sensitivity and 1-specificity}
 }
 \value{
-  a dataframe that contains the below data:
-  \code{observed.genotype} observed genotypes
-  \code{observed.allele.A} observed A alleles
-  \code{observed.allele.B} observed B alleles
+a dataframe that contains the below data:
+\code{observed.genotype} observed genotypes
+\code{observed.allele.A} observed A alleles
+\code{observed.allele.B} observed B alleles
 }
 \description{
-  Simulates errors and adds it to the true data to obtain
-  observed data.  The alleles simulated by the function
-  sim.geno.data are randomly misclassified and used to form
-  new genotypes that represent the observed genotypes.
+Simulates errors and adds it to the true data to obtain
+observed data.  The alleles simulated by the function
+sim.geno.data are randomly misclassified and used to form
+new genotypes that represent the observed genotypes.
+}
+\details{
+
 }
 \examples{
 {
@@ -48,6 +51,6 @@ observed.geno.data <- observed.geno.elts$observed.genotype
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

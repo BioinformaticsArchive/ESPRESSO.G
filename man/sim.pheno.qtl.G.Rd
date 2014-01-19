@@ -2,8 +2,7 @@
 \alias{sim.pheno.qtl.G}
 \title{Simulates continuous outcome data}
 \usage{
-  sim.pheno.qtl.G(num.subjects = 10000, genotype = NULL,
-    geno.efkt = 0.25)
+sim.pheno.qtl.G(num.subjects = 10000, genotype = NULL, geno.efkt = 0.25)
 }
 \arguments{
   \item{num.subjects}{number of subjects to generate.}
@@ -15,13 +14,16 @@
   allele.}
 }
 \value{
-  a binary vector that represents the phenotype data.
+a binary vector that represents the phenotype data.
 }
 \description{
-  The function uses the effects data of the genetic
-  determinant to construct a linear predictor(LP).  The
-  outcome is a normally distributed variable generated with
-  a mean equal to the LP and a standard deviation of 1.
+The function uses the effects data of the genetic
+determinant to construct a linear predictor(LP).  The
+outcome is a normally distributed variable generated with a
+mean equal to the LP and a standard deviation of 1.
+}
+\details{
+
 }
 \examples{
 {
@@ -39,6 +41,6 @@ pheno.data <- sim.pheno.qtl.G(num.subjects=10000, genotype=geno.data, geno.efkt=
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

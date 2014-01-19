@@ -2,7 +2,7 @@
 \alias{sim.geno.data}
 \title{Generates genotypes for a genetic variant}
 \usage{
-  sim.geno.data(num.obs = 10000, geno.model = 0, MAF = 0.1)
+sim.geno.data(num.obs = 10000, geno.model = 0, MAF = 0.1)
 }
 \arguments{
   \item{num.obs}{number of observations to generate.}
@@ -14,14 +14,16 @@
   this is the frequency of the 'at risk' allele)}
 }
 \value{
-  a dataframe that contains the following variables:
-  \code{allele.A} major allele \code{allele.B} minor allele
-  \code{genotype} genotype
+a dataframe that contains the following variables:
+\code{allele.A} major allele \code{allele.B} minor allele
+\code{genotype} genotype
 }
 \description{
-  Generates two alleles and combines them to form the
-  genotype of a SNP under a binary or additive genetic
-  model.
+Generates two alleles and combines them to form the
+genotype of a SNP under a binary or additive genetic model.
+}
+\details{
+
 }
 \examples{
 {
@@ -39,6 +41,6 @@ geno.data <- geno.elts$genotype
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

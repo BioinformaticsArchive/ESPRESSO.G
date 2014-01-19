@@ -14,6 +14,7 @@
 #' @param baseline.OR baseline odds ratio for subject on 95 percent population centile versus 5 percentile. 
 #' This parameter reflects the heterogeneity in disease risk arising from determinates that have not been 
 #' measured or have not been included in the model.
+#' @param pheno.error misclassification rates: 1-sensitivity and 1-specificity
 #' @return a list which holds a matrix, \code{data}, that contains the phenotype and genotype statuses
 #' and an integer, \code{allowed.sample.size.exceeded}, which tells if the maximum population size has been 
 #' exceeded.
@@ -27,23 +28,23 @@
 #' controls <- 8000
 #'
 #' # Example 1: generate cases and controls untill the set number of cases and controls (sample size) is achieved for
-#' # a binary SNP with a MAF of 0.1 and an OR of 1.5;
-#' # the heterogeneity in baseline risk of disease (baseline.OR) is 10.
+#' # a binary SNP with a MAF of 0.1 and an OR of 1.5; the heterogeneity in baseline risk of disease (baseline.OR) is 10
+#' # and the phenotype is measured with a sensitivity and specificity of both 0.9.
 #' sim.matrix <- sim.CC.data.G(block.size=20000,numcases=cases,numcontrols=controls,allowed.sample.size=20000000,
-#'                           disease.prev=0.1, geno.model=0, MAF=0.1, geno.OR=1.5, baseline.OR=10)
+#'                           disease.prev=0.1, geno.model=0, MAF=0.1, geno.OR=1.5, baseline.OR=10, pheno.error=c(0.1,0.1))
 #' data.generated <- sim.matrix$data
 #'
 #' # Example 2: generate cases and controls untill the set number of cases and controls (sample size) is achieved for
-#' # an additive SNP with a MAF of 0.1 and an OR of 1.5;
-#' # the heterogeneity in baseline risk of disease (baseline.OR) is 10.
+#' # an additive SNP with a MAF of 0.1 and an OR of 1.5; the heterogeneity in baseline risk of disease (baseline.OR) is 10
+#' # and the phenotype is measured with a sensitivity and specificity of both 0.9.
 #' sim.matrix <- sim.CC.data.G(block.size=20000,numcases=cases,numcontrols=controls,allowed.sample.size=20000000,
-#'                           disease.prev=0.1, geno.model=1, MAF=0.1, geno.OR=1.5, baseline.OR=10)
+#'                           disease.prev=0.1, geno.model=1, MAF=0.1, geno.OR=1.5, baseline.OR=10, pheno.error=c(0.1,0.1))
 #' data.generated <- sim.matrix$data
 #' 
 #' }
 #' 
 sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, allowed.sample.size=20000000, 
-                        disease.prev=0.1, geno.model=0, MAF=0.1, geno.OR=1.5, baseline.OR=12.36){
+                        disease.prev=0.1, geno.model=0, MAF=0.1, geno.OR=1.5, baseline.OR=12.36, pheno.error=c(0.1,0.1)){
   
    numobs <- block.size
    ncases <- numcases
@@ -54,7 +55,8 @@ sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, all
    geno.maf <- MAF
    geno.odds <- geno.OR
    baseline.odds <- baseline.OR
-  
+   pheno.err <- pheno.error
+   
    # SET UP ZEROED COUNT VECTORS TO DETERMINE WHEN ENOUGH CASES AND CONTROLS HAVE BEEN GENERATED
    complete <- 0
    complete.absolute <- 0
@@ -84,11 +86,14 @@ sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, all
      subject.effect.data <- sim.subject.data(num.obs=numobs, baseline.OR=baseline.odds)
 
      # GENERATE THE TRUE OUTCOME DATA
-     genodata <- genotype
      s.efkt.data <- subject.effect.data
      pheno.data <- sim.pheno.bin.G(num.obs=numobs, disease.prev=pheno.prev, genotype=geno.data$genotype, 
                                    subject.effect.data=s.efkt.data, geno.OR=geno.odds)
-     phenotype <- pheno.data
+     true.phenotype <- pheno.data
+     
+     # GENERATE THE OBSERVED OUTCOME DATA FROM WHICH WE SELECT CASES AND CONTROLS
+     obs.phenotype <- get.obs.pheno(phenotype=true.phenotype, pheno.model=0, pheno.error=pheno.err)
+     phenotype <- obs.phenotype$observed.phenotype
      
      # STORE THE TRUE OUTCOME, GENETIC AND ALLELE DATA IN AN OUTPUT MATRIX 
      # WHERE EACH ROW HOLDS THE RECORDS OF ONE INDIVUDAL
@@ -142,5 +147,6 @@ sim.CC.data.G <- function(block.size=20000, numcases=2000, numcontrols=8000, all
    # NAME THE COLUMNS OF THE MATRIX AND RETURN IT AS A DATAFRAMEDATAFRAME
    colnames(sim.matrix) <- c("id", "phenotype", "genotype", "allele.A", "allele.B")
    mm <- list(data=data.frame(sim.matrix), allowed.sample.size.exceeded=sample.size.excess)
+   
 }
 

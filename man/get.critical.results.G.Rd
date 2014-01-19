@@ -2,10 +2,9 @@
 \alias{get.critical.results.G}
 \title{Provides a summary of the main results}
 \usage{
-  get.critical.results.G(scenario = 1, pheno.model = 0,
-    geno.model = 1, sample.sizes.required = NULL,
-    empirical.power = 0.8, modelled.power = 0.8,
-    mean.beta = NULL)
+get.critical.results.G(scenario = 1, pheno.model = 0, geno.model = 1,
+  sample.sizes.required = NULL, empirical.power = 0.8,
+  modelled.power = 0.8, mean.beta = NULL)
 }
 \arguments{
   \item{scenario}{scenario number.}
@@ -28,14 +27,17 @@
   determinants.}
 }
 \value{
-  a list that contains the sample size required to achieve
-  the desired power and the estimated modelled and
-  theoretical power.
+a list that contains the sample size required to achieve
+the desired power and the estimated modelled and
+theoretical power.
 }
 \description{
-  Gets the number of cases and controls or subjects and the
-  empirical and theoretical power under each model and
-  prints a summary on the screen.
+Gets the number of cases and controls or subjects and the
+empirical and theoretical power under each model and prints
+a summary on the screen.
+}
+\details{
+
 }
 \examples{
 {
@@ -71,6 +73,6 @@ empirical.power, modelled.power, mean.beta)
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

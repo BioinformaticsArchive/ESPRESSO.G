@@ -76,4 +76,5 @@ get.obs.pheno <- function (phenotype=NULL, pheno.model=0, pheno.error=c(0.05,0.0
   
   # RETURN THE TRUE AND OBSERVED PHENOTYPE DATA AS A DATAFRAME
   df <- data.frame(true.phenotype, observed.phenotype)
+  
 }

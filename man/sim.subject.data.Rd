@@ -2,7 +2,7 @@
 \alias{sim.subject.data}
 \title{Simulates the individual effect related to heterogeneity in baseline disease risk}
 \usage{
-  sim.subject.data(num.obs = 10000, baseline.OR = 12.36)
+sim.subject.data(num.obs = 10000, baseline.OR = 12.36)
 }
 \arguments{
   \item{num.obs}{number of observations to simulate.}
@@ -14,17 +14,19 @@
   have not been included in the model.}
 }
 \value{
-  a numerical vector.
+a numerical vector.
 }
 \description{
-  The variation in baseline disease risk is assumed to be
-  normally distributed on a logistic scale. If this
-  parameter is set to 10, the implication is that a 'high
-  risk' subject (someone at the upper 95 percent entile of
-  population risk) is, all else being equal, at 10 times
-  the offs of developing disease compared to someone else
-  who is at 'low risk' (at the lower 5 percent centile of
-  population risk).
+The variation in baseline disease risk is assumed to be
+normally distributed on a logistic scale. If this parameter
+is set to 10, the implication is that a 'high risk' subject
+(someone at the upper 95 percent entile of population risk)
+is, all else being equal, at 10 times the offs of
+developing disease compared to someone else who is at 'low
+risk' (at the lower 5 percent centile of population risk).
+}
+\details{
+
 }
 \examples{
 {
@@ -35,6 +37,6 @@ subject.effect <- sim.subject.data(num.obs=10000, baseline.OR=10)
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

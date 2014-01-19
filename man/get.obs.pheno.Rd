@@ -2,8 +2,8 @@
 \alias{get.obs.pheno}
 \title{Generates observed outcome data}
 \usage{
-  get.obs.pheno(phenotype = NULL, pheno.model = 0,
-    pheno.error = c(0.05, 0.05), pheno.reliability = 0.9)
+get.obs.pheno(phenotype = NULL, pheno.model = 0, pheno.error = c(0.05,
+  0.05), pheno.reliability = 0.9)
 }
 \arguments{
   \item{phenotype}{outcome status.}
@@ -18,16 +18,18 @@
   for a quantitative outcome.}
 }
 \value{
-  A dataframe containing: \code{true.phenotype} the error
-  free outcome data (true data). \code{observed.phenotype}
-  the true outcome data with some added error (observed
-  data).
+A dataframe containing: \code{true.phenotype} the error
+free outcome data (true data). \code{observed.phenotype}
+the true outcome data with some added error (observed
+data).
 }
 \description{
-  Adds a set level of error to error free binary or
-  quantitative data (the true phenotype data) to obtain
-  data with a larger variance (the observed phenotype
-  data).
+Adds a set level of error to error free binary or
+quantitative data (the true phenotype data) to obtain data
+with a larger variance (the observed phenotype data).
+}
+\details{
+
 }
 \examples{
 {
@@ -56,6 +58,6 @@ obs.pheno.data <- get.obs.pheno(phenotype=pheno.data, pheno.model=1, pheno.relia
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

@@ -2,9 +2,8 @@
 \alias{run.espresso.G}
 \title{Runs a full ESPRESSO analysis}
 \usage{
-  run.espresso.G(simulation.params = NULL,
-    pheno.params = NULL, geno.params = NULL,
-    scenarios2run = 1)
+run.espresso.G(simulation.params = NULL, pheno.params = NULL,
+  geno.params = NULL, scenarios2run = 1)
 }
 \arguments{
   \item{simulation.params}{general parameters for the
@@ -19,14 +18,17 @@
   wish to analyse}
 }
 \value{
-  a summary table that contains both the input parameters
-  and the results of the analysis
+a summary table that contains both the input parameters and
+the results of the analysis
 }
 \description{
-  This function calls the functions required to run a full
-  ESPRESSO analysis where the model consists of an outcome
-  (binary or continuous) determinant by a binary or
-  continuous environmental determinant.
+This function calls the functions required to run a full
+ESPRESSO analysis where the model consists of an outcome
+(binary or continuous) determinant by a binary or
+continuous environmental determinant.
+}
+\details{
+
 }
 \examples{
 {
@@ -48,6 +50,6 @@ run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(3,4
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

@@ -2,9 +2,8 @@
 \alias{samplsize.calc}
 \title{Calculates the sample size required to achieve the desired power}
 \usage{
-  samplsize.calc(numcases = 2000, numcontrols = 8000,
-    num.subjects = 500, pheno.model = 0, pval = 1e-04,
-    power = 0.8, mean.model.z = NULL)
+samplsize.calc(numcases = 2000, numcontrols = 8000, num.subjects = 500,
+  pheno.model = 0, pval = 1e-04, power = 0.8, mean.model.z = NULL)
 }
 \arguments{
   \item{numcases}{number of cases when outcome is binary.}
@@ -27,22 +26,25 @@
   se estimate}
 }
 \value{
-  A table containing: \code{numcases.required} number of
-  cases required to achieve the desired power under binary
-  outcome model \code{numcontrols.required} number of
-  controls required to achieve the desired power under
-  binary outcome model \code{numsubjects.required} number
-  of subjects required to achieve the desired power under a
-  quantitative outcome model
+A table containing: \code{numcases.required} number of
+cases required to achieve the desired power under binary
+outcome model \code{numcontrols.required} number of
+controls required to achieve the desired power under binary
+outcome model \code{numsubjects.required} number of
+subjects required to achieve the desired power under a
+quantitative outcome model
 }
 \description{
-  Estimates by how much the simulated study size needs to
-  be inflated or shrank in order to obtain the specified
-  level of power. The ratio of z-statistic required for
-  desired power to mean model z-statistic obtained
-  indicates the relative changes in standard error
-  required. This corresponds to the relative change on
-  scale and square root of sample size.
+Estimates by how much the simulated study size needs to be
+inflated or shrank in order to obtain the specified level
+of power. The ratio of z-statistic required for desired
+power to mean model z-statistic obtained indicates the
+relative changes in standard error required. This
+corresponds to the relative change on scale and square root
+of sample size.
+}
+\details{
+
 }
 \examples{
 {
@@ -63,6 +65,6 @@ sample.sizes.required <- samplsize.calc(mean.model.z=modz)
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

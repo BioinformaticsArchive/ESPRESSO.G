@@ -15,4 +15,3 @@
   }
 }
 \examples{data(true.data.G)}
-

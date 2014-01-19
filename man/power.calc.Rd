@@ -2,8 +2,7 @@
 \alias{power.calc}
 \title{Calculates the empirical and theoretical power}
 \usage{
-  power.calc(pval = 1e-04, z.values = NULL,
-    mean.model.z = NULL)
+power.calc(pval = 1e-04, z.values = NULL, mean.model.z = NULL)
 }
 \arguments{
   \item{pval}{cut-off p-value defining statistical
@@ -15,16 +14,19 @@
   determinant.}
 }
 \value{
-  a list that contains the computed empirical power and
-  theoretical power.
+a list that contains the computed empirical power and
+theoretical power.
 }
 \description{
-  The function determines the empirical and theoretical
-  power. The empirical power is the proportion of
-  simulations in which the z-statistic for the parameter of
-  interest exceeds the z-statistic for the desured level if
-  statistical significance. The theoretical power is the
-  power of the study.
+The function determines the empirical and theoretical
+power. The empirical power is the proportion of simulations
+in which the z-statistic for the parameter of interest
+exceeds the z-statistic for the desured level if
+statistical significance. The theoretical power is the
+power of the study.
+}
+\details{
+
 }
 \examples{
 {
@@ -47,6 +49,6 @@ power.values <- power.calc(z.values=zvals, mean.model.z=modz)
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 

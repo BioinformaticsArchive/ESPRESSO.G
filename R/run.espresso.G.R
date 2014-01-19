@@ -124,25 +124,24 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
      for(s in 1:nsims)            # s from 1 to total number of simulations
      {
   
-        #----------------------------------GENERATE "TRUE" DATA-----------------------------#
+        #-----------------------------GENERATE "TRUE" EXPOSURE DATA AND "OBSERVED" OUTCOME DATA-----------------------------#
   
         if(pheno.mod == 0){ # UNDER BINARY OUTCOME MODEL
-  		      # GENERATE CASES AND CONTROLS UNTILL THE REQUIRED NUMBER OF CASES, CONTROLS IS ACHIEVED 
-  			     sim.data <- sim.CC.data.G(block.size=nobs, numcases=ncases, numcontrols=ncontrols, allowed.sample.size=max.pop.size, 
+  		    # GENERATE CASES AND CONTROLS UNTILL THE REQUIRED NUMBER OF CASES, CONTROLS IS ACHIEVED 
+  			  sim.data <- sim.CC.data.G(block.size=nobs, numcases=ncases, numcontrols=ncontrols, allowed.sample.size=max.pop.size, 
                                        disease.prev=pheno.prev, geno.model=geno.mod, MAF=geno.maf, geno.OR=geno.odds, 
-                                       baseline.OR=baseline.odds)
-  			     t.data <- sim.data$data
+                                       baseline.OR=baseline.odds, pheno.error=pheno.err)
+  			  t.data <- sim.data$data
   
         }else{ # UNDER QUANTITATIVE OUTCOME MODEL
           # GENERATE THE SPECIFIED NUMBER OF SUBJECTS
-          t.data <- sim.QTL.data.G(numsubjects=nsubjects, geno.model=geno.mod, MAF=geno.maf, geno.efkt=geno.efsize)
+          t.data <- sim.QTL.data.G(numsubjects=nsubjects,geno.model=geno.mod,MAF=geno.maf,geno.efkt=geno.efsize,pheno.reliability=pheno.rel)
         }
   
         #------------SIMULATE ERRORS AND ADD THEM TO THE TRUE COVARIATES DATA TO OBTAIN OBSERVED COVARIATES DATA-----------#
   
         # ADD APPROPRIATE ERRORS TO PRODUCE OBSERVED GENOTYPES 
-        o.data <- get.observed.data.G(true.data=t.data,pheno.model=pheno.mod,pheno.error=pheno.err,pheno.reliability=pheno.rel,
-                                              geno.model=geno.mod,MAF=geno.maf,geno.error=geno.err)
+        o.data <- get.observed.data.G(true.data=t.data, geno.model=geno.mod, MAF=geno.maf, geno.error=geno.err)
   
         
         #--------------------------DATA ANALYSIS ----------------------------#

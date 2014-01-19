@@ -2,9 +2,8 @@
 \alias{sim.pheno.bin.G}
 \title{Generates phenotype statuses}
 \usage{
-  sim.pheno.bin.G(num.obs = 10000, disease.prev = 0.1,
-    genotype = NULL, subject.effect.data = NULL,
-    geno.OR = 1.5)
+sim.pheno.bin.G(num.obs = 10000, disease.prev = 0.1, genotype = NULL,
+  subject.effect.data = NULL, geno.OR = 1.5)
 }
 \arguments{
   \item{num.obs}{number of observations to generate per
@@ -22,11 +21,14 @@
   genotype.}
 }
 \value{
-  a binary vector that represents the phenotype data.
+a binary vector that represents the phenotype data.
 }
 \description{
-  Generates affected and non-affected subjects using the
-  genotypes.
+Generates affected and non-affected subjects using the
+genotypes.
+}
+\details{
+
 }
 \examples{
 {
@@ -45,6 +47,6 @@ pheno.data <- sim.pheno.bin.G(num.obs=10000,disease.prev=0.1, genotype=geno.data
 }
 }
 \author{
-  Amadou Gaye
+Amadou Gaye
 }
 
