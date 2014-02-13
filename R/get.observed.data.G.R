@@ -1,6 +1,6 @@
 #' 
 #' @title Generates outcome and exposure data with some added error
-#' @description Adds a specified level of error to outcome and exposure data to generate the 'observed' data.
+#' @description Adds a specified level of error to exposure data to generate the 'observed' data.
 #' See \code{get.obs.pheno} and \code{get.obs.geno} for details on how the observed outcome and exposure data are
 #' obtained.
 #' @param true.data input table of simulated data considered as error free.
@@ -9,7 +9,7 @@
 #' @param geno.error misclassification rates in the assessment of the SNP alleles: 1-sensitivity and 1-specificity
 #' @return A matrix which contains the observed outcome and exposure data
 #' @export
-#' @author Amadou Gaye
+#' @author Gaye,A.
 #' @examples {
 #' 
 #' # load a table of binary outcome and binary exposure (SNP) data

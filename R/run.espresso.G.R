@@ -68,7 +68,7 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
   # CASES AND CONTROLS IS ACHIEVED. IN GENERAL THE ONLY PROBLEM IN ACHIEVING THE
   # REQUIRED NUMBER OF CASES WILL OCCUR IF THE DISEASE PREVALENCE IS VERY LOW
   max.pop.size <- 20000000
-  nobs <- 20000
+  numobs <- 20000
   
   
   # DECLARE MATRIX THAT STORE THE RESULTS FOR EACH SCENARIO (ONE PER SCENARIO PER ROW)
@@ -128,7 +128,7 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
   
         if(pheno.mod == 0){ # UNDER BINARY OUTCOME MODEL
   		    # GENERATE CASES AND CONTROLS UNTILL THE REQUIRED NUMBER OF CASES, CONTROLS IS ACHIEVED 
-  			  sim.data <- sim.CC.data.G(block.size=nobs, numcases=ncases, numcontrols=ncontrols, allowed.sample.size=max.pop.size, 
+  			  sim.data <- sim.CC.data.G(block.size=numobs, numcases=ncases, numcontrols=ncontrols, allowed.sample.size=max.pop.size, 
                                        disease.prev=pheno.prev, geno.model=geno.mod, MAF=geno.maf, geno.OR=geno.odds, 
                                        baseline.OR=baseline.odds, pheno.error=pheno.err)
   			  t.data <- sim.data$data
