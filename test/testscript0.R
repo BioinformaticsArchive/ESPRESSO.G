@@ -23,4 +23,4 @@ pheno.params <- read.table("pheno.params0.csv", header=T, sep=";")
 geno.params <- read.table("geno.params0.csv", header=T, sep=";")
 
 # call the function that runs a full ESPRESSO analysis and set it to run all 18 scenarios
-run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(1:3))
+run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(1:18))
