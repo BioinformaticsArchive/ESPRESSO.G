@@ -44,7 +44,7 @@ sim.QTL.data.G <- function(numsubjects=10000, geno.model=0, MAF=0.1, geno.efkt=0
 	 obs.phenotype <- get.obs.pheno(phenotype=true.phenotype, pheno.model=1, pheno.reliability=pheno.rel)
 	 phenotype <- obs.phenotype$observed.phenotype
    
-   # STORE THE GENERATED OBSERVED OUTCOME AND TRUE EXPOSURE INTO AN OUTPUT MATRIX 
+   # STORE THE GENERATED OBSERVED OUTCOME AND TRUE EXPOSURE DATA INTO AN OUTPUT MATRIX 
    sim.matrix <- cbind(phenotype,genotype,allele.A,allele.B)
 
    # ADD IDs (JUST A ROW COUNT)
