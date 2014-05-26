@@ -9,21 +9,8 @@
 #' \code{allele.A} major allele
 #' \code{allele.B} minor allele
 #' \code{genotype} genotype
-#' @export
-#' @author Amadou Gaye
-#' @examples {
-#' 
-#' # Example 1: binary SNP
-#' # Generate data for a binary SNP with a MAF of 0.1
-#' geno.elts <- sim.geno.data(num.obs=10000, geno.model=0, MAF=0.1)
-#' geno.data <- geno.elts$genotype
-#' 
-#' # Example 2: additive SNP
-#' # Generate data for an additive SNP with a MAF of 0.1
-#' geno.elts <- sim.geno.data(num.obs=10000, geno.model=1, MAF=0.1)
-#' geno.data <- geno.elts$genotype
-#' 
-#' }
+#' @keywords internal
+#' @author Gaye A.
 #' 
 sim.geno.data <- function(num.obs=10000, geno.model=0, MAF=0.1){
   

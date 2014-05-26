@@ -1,30 +1,34 @@
 #' 
 #' @title Runs a full ESPRESSO analysis
 #' @description This function calls the functions required to run a full ESPRESSO analysis 
-#'  where the model consists of an outcome (binary or continuous) determinant by a binary or 
-#'  continuous environmental determinant.
+#' where the model consists of an outcome (binary or continuous) determinant by a binary or 
+#' continuous environmental determinant.
+#' @details The function calls all the functions required to generate the error free data, add 
+#' the error to obtain the observed data, run a glm analysis and calculate the sample size required and
+#' the empirical and theoretical power. The functions called to carry the various tasks are internal.
 #' @param simulation.params general parameters for the scenario(s) to analyse
-#' @param pheno.params paramaters for the outcome variables
+#' @param pheno.params paramaters for the outcome variable
 #' @param geno.params parameters for the genetic determinant
-#' @param scenarios2run the indices of the scenarios one wish to analyse
+#' @param scenarios2run the indices of the scenarios one wishes to analyse
 #' @return a summary table that contains both the input parameters and the results of the analysis
 #' @export
-#' @author Amadou Gaye
+#' @author Gaye A.
 #' @examples {
 #'  
-#' # load the table that hold the input parameters; each of the table hold parameters for 4 scenarios:
-#' # scenario 1: a binary outcome determined by a binary exposure
-#' # scenario 2: a binary outcome determined by a quantitative and normally distributed exposure 
-#' # scenario 3: a quantitative outcome determined by a binary exposure
-#' # scenario 4: a quantitative outcome determined by a quantitative and normally distributed exposure 
+#' # load the table that hold the input parameters; each of the table
+#' # hold parameters for 4 scenarios:
+#' # scenario 1: a binary outcome determined by a binary SNP
+#' # scenario 2: a binary outcome determined by an additive SNP
+#' # scenario 3: a quantitative outcome determined by a binary SNP
+#' # scenario 4: a quantitative outcome determined by an additive SNP 
 #' data(simulation.params) 
 #' data(pheno.params)
 #' data(geno.params)
 #' 
-#' # run the function for the first two scenarios (by default only the first scenario is ran)
+#' # run the function for the first two scenarios, two binomial models
 #' run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(1,2))
 #'
-#' # run the function for the last two scenarios (by default only the first scenario is ran)
+#' # run the function for the last two scenarios, two gaussian models
 #' run.espresso.G(simulation.params, pheno.params, geno.params, scenarios2run=c(3,4))
 #' }
 #'
@@ -73,7 +77,7 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
   
   # DECLARE MATRIX THAT STORE THE RESULTS FOR EACH SCENARIO (ONE PER SCENARIO PER ROW)
   output.file <- "output.csv"
-  output.matrix <- matrix(numeric(0), ncol=27)
+  output.matrix <- matrix(numeric(0), ncol=29)
   column.names <- c(colnames(s.parameters), "exceeded.sample.size?","numcases.required", "numcontrols.required", "numsubjects.required", "empirical.power", "modelled.power",
   "estimated.OR")
   write(t(column.names),output.file,dim(output.matrix)[2],append=TRUE,sep=";")
@@ -101,6 +105,8 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
      # OUTCOME PARAMETERS
      pheno.mod <- s.parameters$pheno.model[j]
      pheno.prev <- s.parameters$disease.prev[j]
+     pheno.mean <- s.parameters$pheno.mean[j]
+     pheno.sd <- s.parameters$pheno.sd[j]
      pheno.err <- c(1-s.parameters$pheno.sensitivity[j],1-s.parameters$pheno.specificity[j])
      pheno.rel <- s.parameters$pheno.reliability[j]    
   
@@ -135,7 +141,7 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
   
         }else{ # UNDER QUANTITATIVE OUTCOME MODEL
           # GENERATE THE SPECIFIED NUMBER OF SUBJECTS
-          t.data <- sim.QTL.data.G(numsubjects=nsubjects,geno.model=geno.mod,MAF=geno.maf,geno.efkt=geno.efsize,pheno.reliability=pheno.rel)
+          t.data <- sim.QTL.data.G(numsubjects=nsubjects,ph.mean=pheno.mean,ph.sd=pheno.sd,geno.model=geno.mod,MAF=geno.maf,geno.efkt=geno.efsize,pheno.reliability=pheno.rel)
         }
   
         #------------SIMULATE ERRORS AND ADD THEM TO THE TRUE COVARIATES DATA TO OBTAIN OBSERVED COVARIATES DATA-----------#
@@ -202,13 +208,13 @@ run.espresso.G <- function(simulation.params=NULL, pheno.params=NULL, geno.param
      if(pheno.mod==0){
         mod <- "binary"
         inparams <- s.parameters[j,]
-        inparams [c(6,14,18)] <- "NA"
+        inparams [c(6,12,13,20)] <- "NA"
         inputs <- inparams
         outputs <- c(excess, critical.res[[2]], critical.res[[3]], "NA", critical.res[[4]], critical.res[[5]], critical.res[[6]])
      }else{
         mod <- "quantitative"
         inparams <- s.parameters[j,]
-        inparams [c(4,5,11,12,13,17)] <- "NA"
+        inparams [c(4,5,11,14,15,19)] <- "NA"
         inputs <- inparams
         outputs <- c("NA", "NA", "NA", critical.res[[2]], critical.res[[3]], critical.res[[4]], critical.res[[5]])
      }

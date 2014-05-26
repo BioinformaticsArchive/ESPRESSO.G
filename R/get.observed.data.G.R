@@ -8,17 +8,8 @@
 #' @param MAF minor allele frequency of the SNP (in ESPRESSO this is the frequency of the 'at risk' allele)
 #' @param geno.error misclassification rates in the assessment of the SNP alleles: 1-sensitivity and 1-specificity
 #' @return A matrix which contains the observed outcome and exposure data
-#' @export
-#' @author Gaye,A.
-#' @examples {
-#' 
-#' # load a table of binary outcome and binary exposure (SNP) data
-#' data(true.data.G)
-#' 
-#' # generate the 'observed' data by adding some error determined by the respective sensitivity and specificity 
-#' # levels of the assessment of the exposure.
-#' observed.data <- get.observed.data.G(true.data=true.data.G, geno.model=0, MAF=0.1, geno.error=c(0.05,0.05))
-#' }
+#' @keywords internal
+#' @author Gaye A.
 #' 
 get.observed.data.G <- function(true.data=NULL, geno.model=0, MAF=0.1, geno.error=c(0.05,0.05)){               
   

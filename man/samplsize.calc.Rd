@@ -46,25 +46,8 @@ of sample size.
 \details{
 
 }
-\examples{
-{
-
-# generate the arguments to pass on to the function (typically the output of the function glm.analysis.G)
-# load a table of quantitative outcome and binary SNP data
-data(observed.data.G)
-
-# run a logistic regression (outcome is binary)
-glm.estimates <- glm.analysis.G(pheno.model=1, observed.data.G)
-beta <- glm.estimates$beta
-se <- glm.estimates$se
-modz <- beta/se
-
-# use the function; in a typical ESPRESSO process 'modz' would be the ratio of the average beta over the average
-# se across the stored beta and se values (after each run the estimates of the glm analysis are stored)
-sample.sizes.required <- samplsize.calc(mean.model.z=modz)
-}
-}
 \author{
-Amadou Gaye
+Gaye A.
 }
+\keyword{internal}
 

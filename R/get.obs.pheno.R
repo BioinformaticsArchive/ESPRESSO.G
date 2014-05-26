@@ -4,39 +4,16 @@
 #' to obtain data with a larger variance (the observed phenotype data).
 #' @param phenotype outcome status.
 #' @param pheno.model distribution of the outcome variable: binary=0, normal=1 or uniform=2.
+#' @param pheno.sd standard deviation of the outcome in the study the population
 #' @param pheno.error misclassification rates: 1-sensitivity and 1-specificity
 #' @param pheno.reliability reliability of the assessment for a quantitative outcome.
 #' @return A dataframe containing:
 #' \code{true.phenotype} the error free outcome data (true data).
 #' \code{observed.phenotype} the true outcome data with some added error (observed data).
-#' @export
-#' @author Amadou Gaye
-#' @examples {
-#' 
-#' # Example 1: a binary phenotype determined by a binary SNP
-#' # Generate data for a binary SNP with a MAF of 0.1
-#' geno.elts <- sim.geno.data(num.obs=10000, geno.model=0, MAF=0.1)
-#' geno.data <- geno.elts$genotype
-#' # generate subject effect data (i.e. heterogeneity in baseline risk) with a baseline OR of 10
-#' s.effect <- sim.subject.data(num.obs=10000, baseline.OR=10)
-#' # generate the 'true' (error free) phenotype data with OR of the exposure = 1.5
-#' pheno.data <- sim.pheno.bin.G(num.obs=10000,disease.prev=0.1, genotype=geno.data, subject.effect.data=s.effect, geno.OR=1.5)
-#' # get the observed phenotype data if the sensitivity and specificity of the assessment of the phenotype are both 0.95
-#' obs.pheno.data <- get.obs.pheno(phenotype=pheno.data, pheno.model=0, pheno.error=c(0.05,0.05))
-#' 
-#' # Example 2: a quantitative phenotype determined by a binary SNP
-#' # Generate data for a binary SNP with a MAF of 0.1
-#' geno.elts <- sim.geno.data(num.obs=10000, geno.model=0, MAF=0.1)
-#' geno.data <- geno.elts$genotype
-#' # Generate quantitative phenotype statuses using the exposure data obtained above and an effect size of 0.25 
-#' # for the 'at risk' genotype
-#' pheno.data <- sim.pheno.qtl.G(num.subjects=10000, genotype=geno.data, geno.efkt=0.25)
-#' # get the observed phenotype data if reliability of the assessment of the phenotype is 0.8
-#' obs.pheno.data <- get.obs.pheno(phenotype=pheno.data, pheno.model=1, pheno.reliability=0.8)
-#' 
-#' }
+#' @keywords internal
+#' @author Gaye A.
 #'
-get.obs.pheno <- function (phenotype=NULL, pheno.model=0, pheno.error=c(0.05,0.05), pheno.reliability=0.9){ 
+get.obs.pheno <- function (phenotype=NULL, pheno.model=0, pheno.sd=1, pheno.error=c(0.05,0.05), pheno.reliability=0.9){ 
   
   if(is.null(phenotype)){
     cat("\n\n ALERT!\n")
@@ -64,14 +41,12 @@ get.obs.pheno <- function (phenotype=NULL, pheno.model=0, pheno.error=c(0.05,0.0
     # RELIABITY = (VAR.true.data/VAR.obs.data) AND VAR.obs.data = (VAR.true.data + VAR.measurement)
     # IT FOLLOWS THAT VAR.true.data + VAR.of.estimate = VAR.true.data/RELIABILITY AND THEN:
     # VAR.measurement = (VAR.true.data/RELIABILITY) - VAR.true.data
-    var.m <- (1^2/pheno.reliability)-(1^2) # standardized SD (SD = 1)
-    
-    # GENERATE THE NORMALLY DISTRIBUTED ERROR USING THE ABOVE COMPUTED VARIANCE
-    num.obs <- length(phenotype)
-    pheno.error <- rnorm(num.obs,0,sqrt(var.m))
+    var.m <- (pheno.sd^2/pheno.reliability)-(pheno.sd^2) 
     
     # ADD THE ERROR TO ORIGINAL PHENOTYPES TO GENERATE THE OBSERVED PHENOTYPE DATA
-    observed.phenotype <- true.phenotype + pheno.error
+    num.obs <- length(true.phenotype)
+    observed.phenotype <- rnorm(num.obs,true.phenotype,sqrt(var.m))
+
   } 
   
   # RETURN THE TRUE AND OBSERVED PHENOTYPE DATA AS A DATAFRAME

@@ -35,22 +35,8 @@ new genotypes that represent the observed genotypes.
 \details{
 
 }
-\examples{
-{
-
-# generate data for a binary SNP with a MAF of 0.1
-geno.elts <- sim.geno.data(num.obs=10000, geno.model=0, MAF=0.1)
-allele.A <- geno.elts$allele.A
-allele.B <- geno.elts$allele.B
-
-# generate the observed genotypes by inducing some misclassification determined
-# by the sensitivity and specificity of the assessment of the alleles
-observed.geno.elts <- get.obs.geno(allele.A, allele.B, geno.model=0, MAF=0.1, geno.error=c(0.05, 0.05))
-observed.geno.data <- observed.geno.elts$observed.genotype
-
-}
-}
 \author{
-Amadou Gaye
+Gaye A.
 }
+\keyword{internal}
 

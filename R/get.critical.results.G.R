@@ -12,40 +12,10 @@
 #' @param modelled.power calculated theoretical power.
 #' @param mean.beta mean beta value of each of the determinants.
 #' @return a list that contains the sample size required to achieve the desired power and the
+#' @keywords internal
 #' estimated modelled and theoretical power.
-#' @export
-#' @author Amadou Gaye
-#' @examples { 
-#' 
-#' # This example assumes results obtained after running an analysis with a quantitative outcome
-#' # determined by a binary SNP
-#' 
-#' # scenario number
-#' j <- 1
-#'
-#' # outcome model
-#' pheno.model <- 1
-#'
-#' # model of the genetic variant
-#' geno.model <- 0
-#'
-#' # Estimated number of subjects required to achieve 80% power
-#' sample.sizes.required <- 10000
-#'
-#' # estimated values for empirical power from the input sample size
-#' empirical.power <- 0.2
-#'
-#' # estimated values for modelled power from the input sample size
-#' modelled.power <- 0.19
-#'
-#' # mean beta value for the single environmenatl determinant 
-#' mean.beta <- 0.20
-#'
-#' # return critical results and print a summary
-#' res <- get.critical.results.G(j, pheno.model, geno.model, sample.sizes.required, 
-#' empirical.power, modelled.power, mean.beta)
-#'
-#' }
+#' @author Gaye A.
+
 #' 
 get.critical.results.G <- function(scenario=1, pheno.model=0, geno.model=1, sample.sizes.required=NULL, 
                                  empirical.power=0.8, modelled.power=0.8, mean.beta=NULL){
@@ -122,8 +92,8 @@ get.critical.results.G <- function(scenario=1, pheno.model=0, geno.model=1, samp
 					cat("\n---- SUMMARY OF SCENARIO",scenario,"----\n")
 					cat("\nModels\n")
 					cat("------\n")
-					cat(" Outcome: quantitative; ")
-					cat(" ",model)
+					cat(" Outcome: quantitative \n")
+					cat(" Genetic determinant: ",model)
 
 					cat("\n\nNumber of subjects required\n")
 					cat("------------------------\n")

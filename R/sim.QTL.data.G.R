@@ -2,27 +2,18 @@
 #' @title Simulates subjects for a continuous outcome
 #' @description Generates the specified number of subjects for a quantitative outcome.
 #' @param numsubjects number of subjects to simulate.
+#' @param ph.mean statistical mean
+#' @param ph.sd standard deviation
 #' @param geno.model genetic model; binary=0 and additive=1.
 #' @param MAF minor allele frequencies of the genetic variant.
 #' @param geno.efkt effect size of the 'at risk' genotype.
 #' @param pheno.reliability reliability of the assessment for a quantitative outcome.
 #' @return a matrix that holds the outcome (\code{phenotype}) and exposure (\code{genotype}) data 
 #' and the SNP alleles used to construct the genotypes.
-#' @export
-#' @author Amadou Gaye
-#' @examples {
+#' @keywords internal
+#' @author Gaye A.
 #' 
-#' # Example 1: generate 5000 subjects for a binary genetic variant with a MAF of 0.1 and an effect size of 0.25;
-#' # the outcome is measured with a reliability of 0.9.
-#' sim.matrix <- sim.QTL.data.G(numsubjects=5000, geno.model=0, MAF=0.1, geno.efkt=0.25, pheno.reliability=0.9)
-#'
-#' # Example 2: generate 5000 subjects for an additive genetic variant with a  MAF of 0.1 and an effect size of 0.25;
-#' # the outcome is measured with a reliability of 0.9.
-#' sim.matrix <- sim.QTL.data.G(numsubjects=5000, geno.model=1, MAF=0.1, geno.efkt=0.25, pheno.reliability=0.9)
-#' 
-#' }
-#' 
-sim.QTL.data.G <- function(numsubjects=10000, geno.model=0, MAF=0.1, geno.efkt=0.25, pheno.reliability=0.9){
+sim.QTL.data.G <- function(numsubjects=10000, ph.mean=0, ph.sd=1, geno.model=0, MAF=0.1, geno.efkt=0.25, pheno.reliability=0.9){
   
 	 geno.mod <- geno.model
    geno.maf <- MAF
@@ -37,11 +28,11 @@ sim.QTL.data.G <- function(numsubjects=10000, geno.model=0, MAF=0.1, geno.efkt=0
 
    # GENERATE THRUE OUTCOME DATA
    genodata <- genotype
-   pheno.data <- sim.pheno.qtl.G(num.subjects=numsubjects, genotype=genodata, geno.efkt=geno.efsize)
+   pheno.data <- sim.pheno.qtl.G(num.subjects=numsubjects, pheno.mean=ph.mean, pheno.sd=ph.sd, genotype=genodata, geno.efkt=geno.efsize)
    true.phenotype <- pheno.data
    
 	 # GENERATE THE OBSERVED OUTCOME DATA 
-	 obs.phenotype <- get.obs.pheno(phenotype=true.phenotype, pheno.model=1, pheno.reliability=pheno.rel)
+	 obs.phenotype <- get.obs.pheno(phenotype=true.phenotype, pheno.model=1, pheno.sd=ph.sd, pheno.reliability=pheno.rel)
 	 phenotype <- obs.phenotype$observed.phenotype
    
    # STORE THE GENERATED OBSERVED OUTCOME AND TRUE EXPOSURE DATA INTO AN OUTPUT MATRIX 

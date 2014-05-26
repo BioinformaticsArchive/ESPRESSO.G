@@ -10,14 +10,8 @@
 #' percentile. This parameter reflects the heterogeneity in disease risk arising from determinantes 
 #' that have not been measured or have not been included in the model.
 #' @return a numerical vector.
-#' @export
-#' @author Amadou Gaye
-#' @examples {
-#' 
-#' # generate subject effect data with a baseline OR of 10
-#' subject.effect <- sim.subject.data(num.obs=10000, baseline.OR=10)
-#' 
-#' }
+#' @keywords internal
+#' @author Gaye A.
 #'
 sim.subject.data <- function (num.obs=10000, baseline.OR=12.36){
   

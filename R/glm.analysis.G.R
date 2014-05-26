@@ -6,17 +6,8 @@
 #' @param pheno.model outcome type: binary=0 and normal=1.
 #' @param observed.data a dataframe that contains the observerd outcome and covariate data.
 #' @return a vector that holds the beta, standard-error and z-statistic of each of the covariates.
-#' @export
-#' @author Amadou Gaye
-#' @examples {
-#' 
-#' # load a table that contains observed quantitative outcome and binary SNP data
-#' data(observed.data.G)
-#'
-#' # run a logistic regression (outcome is quantitative)
-#' glm.estimates <- glm.analysis.G(pheno.model=1, observed.data.G)
-#' 
-#' }
+#' @keywords internal
+#' @author Gaye A.
 #' 
 glm.analysis.G <- function(pheno.model=0, observed.data=NULL){
   

@@ -16,24 +16,8 @@
 #' \code{numcases.required} number of cases required to achieve the desired power under binary outcome model
 #' \code{numcontrols.required} number of controls required to achieve the desired power under binary outcome model
 #' \code{numsubjects.required} number of subjects required to achieve the desired power under a quantitative outcome model
-#' @export
-#' @author Amadou Gaye
-#' @examples {
-#' 
-#' # generate the arguments to pass on to the function (typically the output of the function glm.analysis.G)
-#' # load a table of quantitative outcome and binary SNP data
-#' data(observed.data.G)
-#'
-#' # run a logistic regression (outcome is binary)
-#' glm.estimates <- glm.analysis.G(pheno.model=1, observed.data.G)
-#' beta <- glm.estimates$beta
-#' se <- glm.estimates$se
-#' modz <- beta/se
-#' 
-#' # use the function; in a typical ESPRESSO process 'modz' would be the ratio of the average beta over the average
-#' # se across the stored beta and se values (after each run the estimates of the glm analysis are stored)
-#' sample.sizes.required <- samplsize.calc(mean.model.z=modz)
-#'}
+#' @keywords internal
+#' @author Gaye A.
 #'
 samplsize.calc <-
   function(numcases=2000,numcontrols=8000,num.subjects=500,pheno.model=0,pval=1e-04,power=0.8,mean.model.z=NULL){

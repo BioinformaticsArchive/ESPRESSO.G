@@ -1,14 +1,14 @@
 Package: ESPRESSO.G
 Type: Package
 Title: Power Analysis and Sample Size Calculation for a model with a
-    main effect genetic variant
+    main effect genetic covariate
 Version: 1.0
 Date: 2013-04-01
 Author: Amadou Gaye
-Maintainer: Amadou Gaye <ag239@le.ac.uk>
+Maintainer: Amadou Gaye <amagou.gaye@bristol.ac.uk>
 Description: The package allows for the Estimation of Sample-size and Power by
     Exploring Simulated Study Outcomes for a main effect model where the
-    covariate is biallelic SNP. It supports simulation-based power
+    covariate is a biallelic SNP. It supports simulation-based power
     calculation for stand-alone case-control studies and for case-control
     analyses nested in cohort studies, that take account of realistic
     assessment error.

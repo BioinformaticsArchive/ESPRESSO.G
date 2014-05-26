@@ -28,15 +28,8 @@ risk' (at the lower 5 percent centile of population risk).
 \details{
 
 }
-\examples{
-{
-
-# generate subject effect data with a baseline OR of 10
-subject.effect <- sim.subject.data(num.obs=10000, baseline.OR=10)
-
-}
-}
 \author{
-Amadou Gaye
+Gaye A.
 }
+\keyword{internal}
 

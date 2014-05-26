@@ -25,22 +25,8 @@ genotype of a SNP under a binary or additive genetic model.
 \details{
 
 }
-\examples{
-{
-
-# Example 1: binary SNP
-# Generate data for a binary SNP with a MAF of 0.1
-geno.elts <- sim.geno.data(num.obs=10000, geno.model=0, MAF=0.1)
-geno.data <- geno.elts$genotype
-
-# Example 2: additive SNP
-# Generate data for an additive SNP with a MAF of 0.1
-geno.elts <- sim.geno.data(num.obs=10000, geno.model=1, MAF=0.1)
-geno.data <- geno.elts$genotype
-
-}
-}
 \author{
-Amadou Gaye
+Gaye A.
 }
+\keyword{internal}
 
