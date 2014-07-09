@@ -74,7 +74,7 @@ get.critical.results.G <- function(scenario=1, pheno.model=0, geno.model=1, samp
 					cat("-----------\n")
 					cat(" ",round(modelled.power,2))
 
-					cat("\n\nEstimated ORs\n")
+					cat("\n\nEstimated OR\n")
 					cat("-----------\n")
 					cat(" ",round(estimated.OR,2))
 
@@ -109,9 +109,9 @@ get.critical.results.G <- function(scenario=1, pheno.model=0, geno.model=1, samp
 					cat("-----------\n")
 					cat(" ",round(modelled.power,2))
 
-					cat("\n\nEstimated ORs\n")
+					cat("\n\nEstimated effect\n")
 					cat("-----------\n")
-					cat(" ",estimated.OR)
+					cat(" ",estimated.effect)
 
 					cat("\n\n---- END OF SUMMARY ----\n")
 
